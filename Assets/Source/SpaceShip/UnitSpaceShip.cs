@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using Source.Interfaces;
 using Source.Unit;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,17 +9,16 @@ namespace Source.SpaceShip
 {
     public class UnitSpaceShip : Unit.Unit
     {
-        [SerializeField] private UnitMovable _unitMovable;
-        protected UnitMovable UnitMovable => _unitMovable;
+        [SerializeField] private UnitBoostMoveAndTurn _unitBoostMoveAndTurn;
 
         protected virtual void StartBoost(InputAction.CallbackContext callbackContext)
         {
-            _unitMovable.UnitSpeed.ApplyBoost();
+            _unitBoostMoveAndTurn.ApplyBoost();
         }
 
         protected virtual void EndBoost(InputAction.CallbackContext callbackContext)
         {
-            _unitMovable.UnitSpeed.ResetBoost();
+            _unitBoostMoveAndTurn.ResetBoost();
         }
     }
 }

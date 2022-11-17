@@ -4,6 +4,7 @@ namespace Source.Unit
 {
     public class UnitLimitPosition : MonoBehaviour
     {
+        /*
         [SerializeField] private Unit _unit;
         [SerializeField] private UnitMovable _unitMovable;
 
@@ -21,5 +22,6 @@ namespace Source.Unit
             if (transform.position.y < _unit.Config.YMinPosition)
                 transform.position = new Vector3(transform.position.x, _unit.Config.YMinPosition, transform.position.z);
         }
+        */
     }
 }

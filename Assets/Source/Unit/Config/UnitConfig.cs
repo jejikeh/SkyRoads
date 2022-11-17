@@ -3,9 +3,12 @@ using UnityEngine.Serialization;
 
 namespace Source.Unit
 {
-    [CreateAssetMenu(menuName = "Source/Units/Config", fileName = "UnitConfig", order = 0)]
     public class UnitConfig : ScriptableObject
     {
+        [Header("[Prefab]"), Space] [SerializeField]
+        private Unit _unitPrefab;
+        
+        /*
         [Header("[Name]"), Space] [SerializeField]
         private string _unitName;
 
@@ -18,6 +21,7 @@ namespace Source.Unit
         [SerializeField] private Vector3 _moveDirection;
         [SerializeField] private float _rotateAngle;
         [SerializeField] private float _rotateTime;
+        
         [Header("[Boost]")]
         [SerializeField] private float _boostForwardMultiplier;
         [SerializeField] private float _boostTurnMultiplier;
@@ -28,21 +32,17 @@ namespace Source.Unit
         [SerializeField] private float _yMaxPosition;
         [SerializeField] private float _yMinPosition;
 
-        [Header("[Prefab]"), Space] [SerializeField]
-        private Unit _unitPrefab;
 
         public string UnitName => _unitName;
         public float UnitHealth => _unitHealth;
         public float UnitSpeed => _unitForwardSpeed;
-        public float BoostForwardMultiplier => _boostForwardMultiplier;
         public float UnitTurnSpeed => _unitTurnSpeed;
-        public float BoostTurnMultiplier => _boostTurnMultiplier;
         public Vector3 MoveDirection => _moveDirection;
         public float RotateAngle => _rotateAngle;
         public float RotateTime => _rotateTime;
-        public float BoostTime => _boostTime;
         public float XMaxPosition => _xMaxPosition;
         public float YMaxPosition => _yMaxPosition;
         public float YMinPosition => _yMinPosition;
+        */
     }
 }

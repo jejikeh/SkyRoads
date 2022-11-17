@@ -1,3 +1,4 @@
+using Source.Unit.Config;
 using UnityEngine;
 
 namespace Source.Unit
