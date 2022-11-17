@@ -16,7 +16,6 @@ namespace Source.Ship
 
         private void Start()
         {
-            _playerInputUser.Input.Player.Shoot.performed += Shoot;
             _playerInputUser.Input.Player.StartBoost.performed += StartBoost;
             _playerInputUser.Input.Player.EndBoost.performed += EndBoost;
         }
@@ -25,7 +24,14 @@ namespace Source.Ship
         {
             Vector2 direction = _playerInputUser.Input.Player.Move.ReadValue<Vector2>();
             UnitMovable.Move(direction);
-            UnitMovable.Rotate(direction);
+            Rotate(direction);
+        }
+        
+        private float _currentAngle;
+        private void Rotate(Vector3 direction)
+        {
+            transform.DOLocalRotate(new Vector3((-direction.y * Config.RotateAngle) / 2,0,0), Config.RotateTime);
+            transform.GetChild(0).DOLocalRotate(new Vector3(0,0,-direction.x * Config.RotateAngle), Config.RotateTime);
         }
     }
 }

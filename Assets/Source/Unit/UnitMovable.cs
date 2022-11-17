@@ -7,6 +7,5 @@ namespace Source.Unit
     {
         [SerializeField] public UnitSpeed UnitSpeed;
         public abstract void Move(Vector3 direction);
-        public abstract void Rotate(Vector3 direction);
     }
 }

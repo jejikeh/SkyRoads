@@ -11,12 +11,6 @@ namespace Source.SpaceShip
         [SerializeField] private UnitMovable _unitMovable;
         protected UnitMovable UnitMovable => _unitMovable;
 
-        
-        protected virtual void Shoot(InputAction.CallbackContext callbackContext)
-        {
-            
-        }
-
         protected virtual void StartBoost(InputAction.CallbackContext callbackContext)
         {
             _unitMovable.UnitSpeed.ApplyBoost();
