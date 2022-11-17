@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fca3d3777824ca8b40608e074184ad8, type: 3}
+  m_Name: BaseShip
+  m_EditorClassIdentifier: 
+  _unitName: Base
+  _unitHealth: 10
+  _unitForwardSpeed: 10
+  _unitTurnSpeed: 5
+  _moveDirection: {x: 0, y: 0, z: 1}
+  _rotateAngle: 15
+  _rotateTime: 1
+  _boostForwardMultiplier: 3
+  _boostTurnMultiplier: 0.5
+  _boostTime: 4
+  _xMaxPosition: 2
+  _yMaxPosition: 3
+  _yMinPosition: -1
+  _unitPrefab: {fileID: -1408286694989060901, guid: d2d30b2b222cb724ba0282615004e445, type: 3}
