@@ -21,3 +21,6 @@ MonoBehaviour:
   _unitTurnSpeed: 2
   _rotateAngle: 30
   _rotateTime: 1
+  _xMaxPosition: 2
+  _yMaxPosition: 2
+  _yMinPosition: -1

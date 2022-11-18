@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Source.Unit
 {
     [CreateAssetMenu(menuName = "Source/Units/Config", fileName = "UnitConfigExample", order = 0)]
-    public class UnitConfigExample : UnitConfig, IUnitMovableConfig, IUnitBoostableConfig, IUnitTurnableConfig, IUnitRotateableConfig
+    public class UnitConfigExample : UnitConfig, IUnitMovableConfig, IUnitBoostableConfig, IUnitTurnableConfig, IUnitRotateableConfig, IUnitLimitPositionConfig
     {
         # region Movable
         
@@ -48,6 +48,19 @@ namespace Source.Unit
         public float RotateAngle => _rotateAngle;
         public float RotateTime => _rotateTime;
 
+        #endregion
+
+        #region LimitPosition
+
+        [Header("[LimitPosition]"), Space] 
+        [SerializeField] private float _xMaxPosition;
+        [SerializeField] private float _yMaxPosition;
+        [SerializeField] private float _yMinPosition;
+
+        public float XMaxPosition => _xMaxPosition;
+        public float YMaxPosition => _yMaxPosition;
+        public float YMinPosition => _yMinPosition;
+        
         #endregion
     }
 }
