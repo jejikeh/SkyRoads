@@ -8,14 +8,14 @@ namespace Source.Camera
         [Header("Movement"), Space]
         [Range(0f,1f)]
         [SerializeField] private float _smoothTime;
-
         [SerializeField] private Vector3 _offset;
         [SerializeField] private Transform _target;
-        private void LateUpdate()
+        
+        private Vector3 _velocity = Vector3.zero;
+        private void Update()
         {
             var desiredPosition = _target.position + _offset;
-            var smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, _smoothTime);
-            transform.position = smoothedPosition;
+            transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref _velocity, _smoothTime);
         }
     }
 }
