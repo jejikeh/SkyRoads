@@ -1,10 +1,11 @@
-﻿using Source.Unit.Config.Interfaces;
+﻿using Source.Unit;
+using Source.Unit.Config.Interfaces;
 using UnityEngine;
 
-namespace Source.Unit.Config
+namespace Source.Asteroid
 {
     [CreateAssetMenu(menuName = "Source/Units/Asteroid", fileName = "UnitAsteroidConfig", order = 0)]
-    public class UnitConfigAsteroid : UnitConfig, IUnitMovableConfig
+    public class UnitConfigAsteroid : UnitConfig, IUnitMovableConfig, IUnitRotateableConfig
     {
         # region Movable
         
@@ -16,5 +17,26 @@ namespace Source.Unit.Config
         public Vector3 UnitMoveDirection => _unitMoveDirection;
         
         # endregion
+        
+        # region Random
+        
+        [SerializeField] private float _maxSize;
+        [SerializeField] private float _minSize;
+        [SerializeField] private float _minSpeed;
+        [SerializeField] private float _maxSpeed;
+
+        public float MaxSize => _maxSize;
+        public float MinSize => _minSize;
+        public float MinSpeed => _minSpeed;
+        public float MaxSpeed => _maxSpeed;
+
+        # endregion
+
+        
+        [SerializeField] private float _rotateAngle;
+        [SerializeField] private float _rotateTime;
+
+        public float RotateAngle => _rotateAngle;
+        public float RotateTime => _rotateTime;
     }
 }
