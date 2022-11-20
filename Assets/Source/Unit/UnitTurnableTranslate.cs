@@ -9,7 +9,7 @@ namespace Source.Unit
     {
         public override void Turn(Vector3 direction = new())
         {
-            _unit.transform.Translate(direction * CurrentTurnSpeed * Time.deltaTime);
+            _unit.transform.Translate(direction * (CurrentTurnSpeed * Time.deltaTime));
         }
     }
 }

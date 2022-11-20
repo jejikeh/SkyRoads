@@ -1,10 +1,11 @@
-﻿using Source.Unit.Config.Interfaces;
+﻿using Source.Unit;
+using Source.Unit.Config.Interfaces;
 using UnityEngine;
 
-namespace Source.Unit
+namespace Source.SpaceShip
 {
     [CreateAssetMenu(menuName = "Source/Units/Config", fileName = "UnitConfigExample", order = 0)]
-    public class UnitConfigExample : UnitConfig, IUnitMovableConfig, IUnitBoostableConfig, IUnitTurnableConfig, IUnitRotateableConfig, IUnitLimitPositionConfig
+    public class UnitConfigSpaceship : UnitConfig, IUnitMovableConfig, IUnitBoostableConfig, IUnitTurnableConfig, IUnitRotateableConfig, IUnitLimitPositionConfig
     {
         # region Movable
         

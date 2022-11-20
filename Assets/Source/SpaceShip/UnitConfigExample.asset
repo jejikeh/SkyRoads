@@ -16,11 +16,11 @@ MonoBehaviour:
   _unitForwardSpeed: 10
   _unitMoveDirection: {x: 0, y: 0, z: 1}
   _boostForwardMultiplier: 2
-  _boostTurnMultiplier: 2
+  _boostTurnMultiplier: 0.5
   _accelerationTime: 1
   _unitTurnSpeed: 2
   _rotateAngle: 30
   _rotateTime: 1
-  _xMaxPosition: 2
+  _xMaxPosition: 1.5
   _yMaxPosition: 2
-  _yMinPosition: -1
+  _yMinPosition: -0.5

@@ -10,7 +10,7 @@ namespace Source.SpaceShip
     public class UnitSpaceShip : Unit.Unit
     {
         [SerializeField] private UnitBoostMoveAndTurn _unitBoostMoveAndTurn;
-
+        
         protected virtual void StartBoost(InputAction.CallbackContext callbackContext)
         {
             _unitBoostMoveAndTurn.ApplyBoost();
