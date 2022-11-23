@@ -11,15 +11,15 @@ namespace Source.Unit
         public abstract void Turn(Vector3 direction = new());
 
         [SerializeField] protected Unit _unit;
-        protected IUnitTurnableConfig UnitTurnableConfig;
+        private IUnitTurnableConfig _unitTurnableConfig;
 
         private void Awake()
         {
-            UnitTurnableConfig = _unit.Config as IUnitTurnableConfig;
-            if(UnitTurnableConfig is null)
+            _unitTurnableConfig = _unit.Config as IUnitTurnableConfig;
+            if(_unitTurnableConfig is null)
                 throw new FieldAccessException($"{_unit.Config.GetType()} expected IUnitMovableConfig");
 
-            CurrentTurnSpeed = UnitTurnableConfig.UnitTurnSpeed;
+            CurrentTurnSpeed = _unitTurnableConfig.UnitTurnSpeed;
         }
 
     }

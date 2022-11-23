@@ -24,6 +24,7 @@ namespace Source.Unit
         private float _accelerationTime;
         
         private bool _inBoostMode;
+        private bool _inStopMode;
 
         private IUnitBoostableConfig _unitBoostableConfig;
         
@@ -40,18 +41,41 @@ namespace Source.Unit
             _accelerationTime = _unitBoostableConfig.AccelerationTime;
         }
 
-        public void ApplyBoost()
+        public void ApplyBoostMode()
         {
             _inBoostMode = true;
+            _inStopMode = false;
         }
 
-        public void ResetBoost()
+        public void ResetModes()
         {
+            _inBoostMode = false;
+            _inStopMode = false;
+        }
+
+        public void ApplyStopMode()
+        {
+            _inStopMode = true;
             _inBoostMode = false;
         }
 
         private void Update()
         {
+            if (_inStopMode)
+            {
+                _unitForwardMovable.CurrentForwardSpeed = Mathf.Lerp(
+                    _unitForwardMovable.CurrentForwardSpeed,
+                    _maxForwardBaseSpeed / _boostForwardMultiplier,
+                    _accelerationTime * Time.deltaTime);
+               
+                _unitTurnable.CurrentTurnSpeed = Mathf.Lerp(
+                    _unitTurnable.CurrentTurnSpeed,
+                    _maxTurnBaseSpeed / _boostTurnMultiplier,
+                    _accelerationTime * Time.deltaTime);
+
+                return;
+            }
+            
             if (_inBoostMode)
             {
                _unitForwardMovable.CurrentForwardSpeed = Mathf.Lerp(

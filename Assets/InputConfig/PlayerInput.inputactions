@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "StartBoost",
+                    "name": "BoostSpeedMode",
                     "type": "Button",
                     "id": "f079984e-803c-4b93-8b31-8c07973eca86",
                     "expectedControlType": "Button",
@@ -33,12 +33,21 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "EndBoost",
+                    "name": "DefaultSpeedMode",
                     "type": "Button",
                     "id": "2d709507-c63f-4724-a748-fde4a68ba799",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "MultiTap,Press(behavior=1)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "StopSpeedMode",
+                    "type": "Button",
+                    "id": "1820f1fb-e758-4732-91ef-3cb073d913d6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "MultiTap,Hold(duration=0.2)",
                     "initialStateCheck": false
                 }
             ],
@@ -171,7 +180,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "StartBoost",
+                    "action": "BoostSpeedMode",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -182,7 +191,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "EndBoost",
+                    "action": "DefaultSpeedMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "06b03b31-136d-48a6-8892-93ab3e3289c3",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "DefaultSpeedMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "864c01a4-f395-4ae1-95c7-874cb2d314b4",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "StopSpeedMode",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

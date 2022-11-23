@@ -46,7 +46,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""StartBoost"",
+                    ""name"": ""BoostSpeedMode"",
                     ""type"": ""Button"",
                     ""id"": ""f079984e-803c-4b93-8b31-8c07973eca86"",
                     ""expectedControlType"": ""Button"",
@@ -55,12 +55,21 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""EndBoost"",
+                    ""name"": ""DefaultSpeedMode"",
                     ""type"": ""Button"",
                     ""id"": ""2d709507-c63f-4724-a748-fde4a68ba799"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""MultiTap,Press(behavior=1)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""StopSpeedMode"",
+                    ""type"": ""Button"",
+                    ""id"": ""1820f1fb-e758-4732-91ef-3cb073d913d6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""MultiTap,Hold(duration=0.2)"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -193,7 +202,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""PC"",
-                    ""action"": ""StartBoost"",
+                    ""action"": ""BoostSpeedMode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -204,7 +213,29 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""PC"",
-                    ""action"": ""EndBoost"",
+                    ""action"": ""DefaultSpeedMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""06b03b31-136d-48a6-8892-93ab3e3289c3"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""DefaultSpeedMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""864c01a4-f395-4ae1-95c7-874cb2d314b4"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""StopSpeedMode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -234,8 +265,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
-        m_Player_StartBoost = m_Player.FindAction("StartBoost", throwIfNotFound: true);
-        m_Player_EndBoost = m_Player.FindAction("EndBoost", throwIfNotFound: true);
+        m_Player_BoostSpeedMode = m_Player.FindAction("BoostSpeedMode", throwIfNotFound: true);
+        m_Player_DefaultSpeedMode = m_Player.FindAction("DefaultSpeedMode", throwIfNotFound: true);
+        m_Player_StopSpeedMode = m_Player.FindAction("StopSpeedMode", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -297,16 +329,18 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Shoot;
-    private readonly InputAction m_Player_StartBoost;
-    private readonly InputAction m_Player_EndBoost;
+    private readonly InputAction m_Player_BoostSpeedMode;
+    private readonly InputAction m_Player_DefaultSpeedMode;
+    private readonly InputAction m_Player_StopSpeedMode;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
         public PlayerActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
-        public InputAction @StartBoost => m_Wrapper.m_Player_StartBoost;
-        public InputAction @EndBoost => m_Wrapper.m_Player_EndBoost;
+        public InputAction @BoostSpeedMode => m_Wrapper.m_Player_BoostSpeedMode;
+        public InputAction @DefaultSpeedMode => m_Wrapper.m_Player_DefaultSpeedMode;
+        public InputAction @StopSpeedMode => m_Wrapper.m_Player_StopSpeedMode;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -322,12 +356,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Shoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
-                @StartBoost.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStartBoost;
-                @StartBoost.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStartBoost;
-                @StartBoost.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStartBoost;
-                @EndBoost.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEndBoost;
-                @EndBoost.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEndBoost;
-                @EndBoost.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEndBoost;
+                @BoostSpeedMode.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBoostSpeedMode;
+                @BoostSpeedMode.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBoostSpeedMode;
+                @BoostSpeedMode.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBoostSpeedMode;
+                @DefaultSpeedMode.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDefaultSpeedMode;
+                @DefaultSpeedMode.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDefaultSpeedMode;
+                @DefaultSpeedMode.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDefaultSpeedMode;
+                @StopSpeedMode.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStopSpeedMode;
+                @StopSpeedMode.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStopSpeedMode;
+                @StopSpeedMode.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStopSpeedMode;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -338,12 +375,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
-                @StartBoost.started += instance.OnStartBoost;
-                @StartBoost.performed += instance.OnStartBoost;
-                @StartBoost.canceled += instance.OnStartBoost;
-                @EndBoost.started += instance.OnEndBoost;
-                @EndBoost.performed += instance.OnEndBoost;
-                @EndBoost.canceled += instance.OnEndBoost;
+                @BoostSpeedMode.started += instance.OnBoostSpeedMode;
+                @BoostSpeedMode.performed += instance.OnBoostSpeedMode;
+                @BoostSpeedMode.canceled += instance.OnBoostSpeedMode;
+                @DefaultSpeedMode.started += instance.OnDefaultSpeedMode;
+                @DefaultSpeedMode.performed += instance.OnDefaultSpeedMode;
+                @DefaultSpeedMode.canceled += instance.OnDefaultSpeedMode;
+                @StopSpeedMode.started += instance.OnStopSpeedMode;
+                @StopSpeedMode.performed += instance.OnStopSpeedMode;
+                @StopSpeedMode.canceled += instance.OnStopSpeedMode;
             }
         }
     }
@@ -361,7 +401,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
-        void OnStartBoost(InputAction.CallbackContext context);
-        void OnEndBoost(InputAction.CallbackContext context);
+        void OnBoostSpeedMode(InputAction.CallbackContext context);
+        void OnDefaultSpeedMode(InputAction.CallbackContext context);
+        void OnStopSpeedMode(InputAction.CallbackContext context);
     }
 }

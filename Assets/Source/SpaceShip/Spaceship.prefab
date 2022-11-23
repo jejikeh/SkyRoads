@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 3573131742838653289}
   - component: {fileID: 8496081523287140433}
   - component: {fileID: 522448023582407208}
-  - component: {fileID: 235171685870874989}
+  - component: {fileID: 520858319602193668}
   m_Layer: 0
   m_Name: Space
   m_TagString: Untagged
@@ -226,7 +226,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3752484838405365648}
   m_Mesh: {fileID: 4300008, guid: e7674e9ed06151745829c8f47cc06893, type: 3}
---- !u!65 &235171685870874989
+--- !u!65 &520858319602193668
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -237,8 +237,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.3971744, y: 0.53681076, z: 3.0832255}
-  m_Center: {x: 0.00019288063, y: 0.035624877, z: 0.32124567}
+  m_Size: {x: 0.69, y: 0.53681076, z: 1.34}
+  m_Center: {x: 0.00019288063, y: 0.035624877, z: -0.02}
 --- !u!1 &5499540449190107225
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,6 +396,7 @@ GameObject:
   - component: {fileID: 3098636700162107300}
   - component: {fileID: 8710268782641155616}
   - component: {fileID: 1564796608948270800}
+  - component: {fileID: 4444878818652610103}
   m_Layer: 0
   m_Name: Spaceship
   m_TagString: Untagged
@@ -432,11 +433,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitConfig: {fileID: 11400000, guid: d5752d009a098864b9597bdb0f8e4580, type: 2}
-  _unitBoostMoveAndTurn: {fileID: 4195458215349594010}
   _playerInputUser: {fileID: 5496681084082076940}
   _unitForwardMovable: {fileID: 6058475859190335652}
   _unitTurnableBase: {fileID: 3098636700162107300}
   _unitSmoothRotate: {fileID: 8710268782641155616}
+  _unitBoostMoveAndTurn: {fileID: 4195458215349594010}
 --- !u!114 &5496681084082076940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -529,3 +530,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unit: {fileID: -1408286694989060901}
+--- !u!54 &4444878818652610103
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5543844019769436646}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

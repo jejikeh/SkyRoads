@@ -15,7 +15,7 @@ MonoBehaviour:
   _unitPrefab: {fileID: 0}
   _unitForwardSpeed: 1
   _unitMoveDirection: {x: 0, y: 0, z: -1}
-  _maxSize: 1
+  _maxSize: 0.7
   _minSize: 0.2
   _minSpeed: 1
   _maxSpeed: 10
