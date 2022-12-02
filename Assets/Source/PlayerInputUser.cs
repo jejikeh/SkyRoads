@@ -12,12 +12,12 @@ namespace Source
             _input = new PlayerInput();
         }
 
-        private void OnEnable()
+        public void OnEnable()
         {
             _input.Enable();
         }
 
-        private void OnDisable()
+        public void OnDisable()
         {
             _input.Disable();
         }
