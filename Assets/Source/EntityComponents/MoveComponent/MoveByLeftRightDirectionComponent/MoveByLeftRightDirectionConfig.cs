@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using Source.Core;
+using UnityEngine;
 
 namespace Source.EntityComponents.MoveComponent.MoveByLeftRightDirectionComponent
 {
-    [CreateAssetMenu(fileName = "FILENAME", menuName = "MENUNAME", order = 0)]
-    public class MoveByLeftRightDirectionConfig : ScriptableObject
+    [CreateAssetMenu(fileName = "MoveByTurnDirection", menuName = "config/component/moveleftright", order = 0)]
+    public class MoveByLeftRightDirectionConfig : EmptyComponentConfig
     {
-        
+        [SerializeField] private float _speed;
+        public float Speed => _speed;
     }
 }

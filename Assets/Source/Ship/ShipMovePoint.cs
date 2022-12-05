@@ -9,7 +9,7 @@ using MoveByLeftRightDirection = Source.EntityComponents.MoveComponent.MoveByLef
 
 namespace Source.Ship
 {
-    public class Ship : Entity
+    public class ShipMovePoint : Entity
     {
         [SerializeField] private float _limitMinXPosition;
         [SerializeField] private float _limitMaxXPosition;
@@ -17,17 +17,11 @@ namespace Source.Ship
         [SerializeField] private float _limitMaxYPosition;
 
         [SerializeField] private PlayerInputUser _playerInputUser;
-        private void Awake()
-        {
-            AddCustomComponent(new MoveByLeftRightDirection(this));
-        }
 
         private void Start()
         {
-            StartComponents();
+            AddCustomComponent(new MoveByLeftRightDirection(this));
         }
-
-        
         
         private void FixedUpdate()
         {

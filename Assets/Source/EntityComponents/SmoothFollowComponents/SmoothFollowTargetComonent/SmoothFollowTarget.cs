@@ -9,15 +9,18 @@ namespace Source.EntityComponents.SmoothFollowTargetComponent
     {
         private Transform _target;
         private Vector3 _velocity = Vector3.zero;
-
-        public SmoothFollowTarget(IComponentHandler entity, Transform target) : base(entity)
+        private bool _affectBySpeed;
+        public SmoothFollowTarget(IComponentHandler entity, Transform target, bool affectBySpeed = false) : base(entity)
         {
             _target = target;
+            _affectBySpeed = affectBySpeed;
         }
         
         public override void Update(float timeScale)
         {
-            var desiredPosition = _target.position + Config.Offset - Vector3.forward * MoveComponentsBoostMultiplier.BoostSpeedMultiplier;
+            var desiredPosition = _target.position + Config.Offset;
+            if (_affectBySpeed)
+                desiredPosition -= Vector3.forward * MoveComponentsBoostMultiplier.BoostSpeedMultiplier;
             Entity.transform.position = Vector3.SmoothDamp(Entity.transform.position, desiredPosition, ref _velocity, Config.SmoothTime * Time.deltaTime);
         }
         

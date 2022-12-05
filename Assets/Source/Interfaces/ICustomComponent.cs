@@ -1,9 +1,12 @@
-﻿namespace Source.Interfaces
+﻿using System.Threading;
+using UnityEngine;
+
+namespace Source.Interfaces
 {
     public interface ICustomComponent
     {
         public void Start();
-        public void Update();
+        public void Update(float timeScale);
         public void Enable();
         public void Disable();
         public bool Enabled { get; }

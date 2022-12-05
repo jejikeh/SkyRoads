@@ -32,7 +32,7 @@ namespace Source.SpaceShip
 
         private void OnTriggerEnter(Collider other)
         {
-            GameStateManager.Instance.SetGameState(GameStateManager.GameState.Dead);
+            // GameStateManager.SetGameState(GameStateManager.GameState.Dead);
         }
     }
 }

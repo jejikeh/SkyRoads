@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Source.EntityComponents.SmoothTransformRotateComponent
 {
     [CreateAssetMenu(fileName = "SmoothRotateConfig", menuName = "config/component/smoothrotate", order = 0)]
-    public class SmoothTransformRotateConfig : EntityComponentConfig
+    public class SmoothTransformRotateConfig : EmptyComponentConfig
     {
         [SerializeField] private float _rotateAngle;
         [SerializeField] private float _rotateTime;

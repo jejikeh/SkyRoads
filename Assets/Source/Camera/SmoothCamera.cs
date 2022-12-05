@@ -1,21 +1,31 @@
 ﻿using System;
+using Source.Core;
+using Source.EntityComponents.CameraFovChangerComponent;
+using Source.EntityComponents.MoveComponent;
+using Source.EntityComponents.SmoothFollowTargetComponent;
 using UnityEngine;
 
 namespace Source.Camera
 {
-    public class SmoothCamera : MonoBehaviour
+    public class SmoothCamera : Entity
     {
-        [Header("Movement"), Space]
-        [Range(0f,1f)]
-        [SerializeField] private float _smoothTime;
-        [SerializeField] private Vector3 _offset;
+        [Header("SmoothFollowTarget"), Space]
         [SerializeField] private Transform _target;
-        
-        private Vector3 _velocity = Vector3.zero;
-        private void Update()
+
+        private void Awake()
         {
-            var desiredPosition = _target.position + _offset;
-            transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref _velocity, _smoothTime);
+            AddCustomComponent(new SmoothFollowTarget(this, _target));
+            AddCustomComponent(new CameraSpeedFovChanger(this, GetComponent<UnityEngine.Camera>()));
+        }
+
+        private void Start()
+        {
+            StartComponents();
+        }
+
+        private void FixedUpdate()
+        {
+            UpdateComponents();
         }
     }
 }

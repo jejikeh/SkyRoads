@@ -9,7 +9,7 @@ namespace Source.Core
 {
     public abstract class Entity : MonoBehaviour, IComponentHandler
     {
-        [SerializeField] private List<EntityComponentConfig> _componentConfigs = new List<EntityComponentConfig>();
+        [SerializeField] private List<EmptyComponentConfig> _componentConfigs = new List<EmptyComponentConfig>();
         private readonly List<ICustomComponent> _components = new List<ICustomComponent>();
         
         protected void StartComponents()
@@ -18,19 +18,46 @@ namespace Source.Core
                 component.Start();
         }
         
-        protected void UpdateComponents()
+        /// <summary>
+        /// Update each component draped over an entity
+        /// </summary>
+        /// <param name="timeScale"></param>
+        protected void UpdateComponents(float timeScale = 1f)
         {
             foreach (var component in _components.Where(x => x.Enabled))
-                component.Update();
+                component.Update(timeScale);
+        }
+        
+        /// <summary>
+        /// Updates only those components that were specified in the arguments
+        /// </summary>
+        /// <param name="timeScale">The scale at which time passes for components</param>
+        /// <param name="specificComponents"></param>
+        protected void UpdateSpecificComponents(float timeScale = 1f, params ICustomComponent[] specificComponents)
+        {
+            foreach (var component in _components.Where(x => x.Enabled || specificComponents.Contains(x)))
+                component.Update(timeScale);
+        }
+        
+        /// <summary>
+        /// Updates only those components that were specified in the array
+        /// </summary>
+        /// <param name="timeScale">The scale at which time passes for components</param>
+        /// <param name="specificComponents"></param>
+        protected void UpdateSpecificComponents(ICustomComponent[] specificComponents, float timeScale)
+        {
+            foreach (var component in _components.Where(x => x.Enabled || specificComponents.Contains(x)))
+                component.Update(timeScale);
         }
 
-        public void AddCustomComponent(ICustomComponent component)
+        public ICustomComponent AddCustomComponent(ICustomComponent component)
         {
             var requiredComponent = _components.FirstOrDefault(x => component.GetType() == x.GetType());
             if (requiredComponent is not null)
                 throw new EntityAlreadyHasComponentOfThisClass(component.GetType());
             
             _components.Add(component);
+            return component;
         }
 
         public void RemoveCustomComponent<T>() where T : class, ICustomComponent
@@ -39,7 +66,7 @@ namespace Source.Core
             _components.Remove(component);
         }
 
-        public T GetCustomComponentConfig<T>() where T : EntityComponentConfig
+        public T GetCustomComponentConfig<T>() where T : EmptyComponentConfig
         {
             var requiredConfig = _componentConfigs.FirstOrDefault(x => typeof(T) == x.GetType());
             if (requiredConfig is null)
@@ -63,7 +90,7 @@ namespace Source.Core
             return requiredComponent as T;
         }
 
-        public T TryGetCustomComponentConfig<T>() where T : EntityComponentConfig
+        public T TryGetCustomComponentConfig<T>() where T : EmptyComponentConfig
         {
             var requiredConfig = _componentConfigs.FirstOrDefault(x => typeof(T) == x.GetType());
             return requiredConfig as T;

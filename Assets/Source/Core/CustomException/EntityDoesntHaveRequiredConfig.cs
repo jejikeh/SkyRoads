@@ -2,7 +2,7 @@
 
 namespace Source.Core.CustomException
 {
-    public class EntityDoesntHaveRequiredConfig<T> : Exception where T : EntityComponentConfig
+    public class EntityDoesntHaveRequiredConfig<T> : Exception where T : EmptyComponentConfig
     {
         private const string ExceptionMessage = "The entity does not have the required config";
         public EntityDoesntHaveRequiredConfig() { }

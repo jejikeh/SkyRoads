@@ -10,13 +10,13 @@ namespace Source.Managers.GameStateManager
         public static void SetDeadState()
         {
             Time.timeScale = 0.1f;
-            UIManager.Instance.OpenWindow<DeadScreen>();
+            // UIManager.Instance.OpenWindow<DeadScreen>();
         }
 
         public static void ResetDeadState()
         {
             Time.timeScale = 1.0f;
-            UIManager.Instance.CloseWindow<DeadScreen>();
+            // UIManager.Instance.CloseWindow<DeadScreen>();
         }
     }
 }

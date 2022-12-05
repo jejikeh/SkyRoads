@@ -1,15 +1,14 @@
 ﻿using System;
 using Source.Interfaces;
-using Source.WIP;
 
 namespace Source.Core
 {
-    public abstract class EntityComponent<T> : ICustomComponent where T : EntityComponentConfig
+    public abstract class EntityComponent<T> : ICustomComponent where T : EmptyComponentConfig
     {
         private bool _enabled = true;
         public bool Enabled => _enabled;
         public abstract void Start();
-        public abstract void Update();
+        public abstract void Update(float timeScale);
         protected virtual void OnEnable() { }
         protected virtual void OnDisable() { }
         
