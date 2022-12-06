@@ -1,12 +1,13 @@
 ﻿using Source.Core;
+using Source.Interfaces;
 using UnityEngine;
 
 namespace Source.EntityComponents.MoveComponent.MoveByLeftRightDirectionComponent
 {
-    [CreateAssetMenu(fileName = "MoveByTurnDirection", menuName = "config/component/moveleftright", order = 0)]
-    public class MoveByLeftRightDirectionConfig : EmptyComponentConfig
+    [System.Serializable]
+    public class MoveByLeftRightDirectionConfig : ICustomComponentConfig
     {
-        [SerializeField] private float _speed;
-        public float Speed => _speed;
+        public float Speed;
+        public Transform Handler;
     }
 }

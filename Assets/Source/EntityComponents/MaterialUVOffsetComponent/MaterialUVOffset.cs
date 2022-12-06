@@ -1,34 +1,33 @@
 ﻿using System;
 using Source.Core;
-using Source.Interfaces;
 using UnityEngine;
 
 namespace Source.EntityComponents.MaterialUVOffsetComponent
 {
-    public class MaterialUVOffset : EntityComponent<EmptyComponentConfig>
+    public class MaterialUVOffset : EntityComponent<MaterialUVOffsetConfig>
     {
-        private static readonly int MainTex = Shader.PropertyToID("_MainTex");
-        private static readonly int SpecTex = Shader.PropertyToID("_SpecTex");
-        private static readonly int NormalTex = Shader.PropertyToID("_NormalTex");
-        private static readonly int EmissionTex = Shader.PropertyToID("_EmissionTex");
-        private readonly Material _material;
+        private readonly int _mainTex;
+        private readonly int _specTex;
+        private readonly int _normalTex;
+        private readonly int _emissionTex;
         private float _offsetY;
-
         
-        public MaterialUVOffset(IComponentHandler entity, Material material) : base(entity)
+        public MaterialUVOffset(MaterialUVOffsetConfig config) : base(config)
         {
-            _material = material;
+            _mainTex = Shader.PropertyToID(config.MainTexId);
+            _specTex = Shader.PropertyToID(config.SpecTexId);
+            _normalTex = Shader.PropertyToID(config.NormalTexId);
+            _emissionTex = Shader.PropertyToID(config.EmissionTexId);
         }
-
-        public override void Start() { }
 
         public override void Update(float timeScale)
         {
             _offsetY += Time.deltaTime * timeScale;
-            _material.SetTextureOffset(MainTex, new Vector2(0, -_offsetY));
-            _material.SetTextureOffset(SpecTex, new Vector2(0, -_offsetY));
-            _material.SetTextureOffset(NormalTex, new Vector2(0, -_offsetY));
-            _material.SetTextureOffset(EmissionTex, new Vector2(0, -_offsetY));
+            
+            Config.Material.SetTextureOffset(_mainTex, new Vector2(0, -_offsetY));
+            Config.Material.SetTextureOffset(_specTex, new Vector2(0, -_offsetY));
+            Config.Material.SetTextureOffset(_normalTex, new Vector2(0, -_offsetY));
+            Config.Material.SetTextureOffset(_emissionTex, new Vector2(0, -_offsetY));
 
             if (Math.Abs(_offsetY - 1f) < 0.01)
                 _offsetY = 0;

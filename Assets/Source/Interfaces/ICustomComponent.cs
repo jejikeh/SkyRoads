@@ -5,7 +5,6 @@ namespace Source.Interfaces
 {
     public interface ICustomComponent
     {
-        public void Start();
         public void Update(float timeScale);
         public void Enable();
         public void Disable();

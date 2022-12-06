@@ -3,38 +3,49 @@ using Source.Interfaces;
 
 namespace Source.Core
 {
-    public abstract class EntityComponent<T> : ICustomComponent where T : EmptyComponentConfig
+    public abstract class EntityComponent<T> :  ICustomComponent where T : ICustomComponentConfig 
     {
-        private bool _enabled = true;
         public bool Enabled => _enabled;
-        public abstract void Start();
-        public abstract void Update(float timeScale);
+        
+        #region EnableDisable
+        
+        private bool _enabled = true;
+        
         protected virtual void OnEnable() { }
         protected virtual void OnDisable() { }
         
+        /// <summary>
+        /// Enable component
+        /// </summary>
         public void Enable()
         {
             _enabled = true;
             OnEnable();
         }
 
+        /// <summary>
+        /// Disable component
+        /// </summary>
         public void Disable()
         {
             _enabled = false;
             OnDisable();
         }
         
-        protected readonly T Config;
-        protected Entity Entity;
-        protected EntityComponent(IComponentHandler entity)
-        {
-            Entity = entity as Entity;
-            if (Entity is null)
-                throw new NullReferenceException("Object is not Entity");
-            
-            Config = Entity.GetCustomComponentConfig<T>();
-        }
+        #endregion
 
-        public T GetConfig => Config;
+        protected T Config => _config;
+
+        private readonly T _config; 
+        protected EntityComponent(T config)
+        {
+            _config = config;
+        }
+        
+        /// <summary>
+        /// Implies calling yourself in Update
+        /// </summary>
+        /// <param name="timeScale"></param>
+        public abstract void Update(float timeScale);
     }
 }

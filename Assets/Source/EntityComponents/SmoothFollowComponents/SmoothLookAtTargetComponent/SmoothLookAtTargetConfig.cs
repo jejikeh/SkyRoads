@@ -1,12 +1,13 @@
-﻿using Source.Core;
+﻿using Source.Interfaces;
 using UnityEngine;
 
-namespace Source.EntityComponents.SmoothFollowTargetComponent
+namespace Source.EntityComponents.SmoothFollowComponents.SmoothLookAtTargetComponent
 {
-    [CreateAssetMenu(fileName = "SmoothLookAtTargetConfig", menuName = "config/component/smoothlookattarget", order = 0)]
-    public class SmoothLookAtTargetConfig : EmptyComponentConfig
+    [System.Serializable]
+    public class SmoothLookAtTargetConfig : ICustomComponentConfig
     {
-        public float SmoothTime => _smoothTime;
-        [Range(0f, 100f)] [SerializeField] private float _smoothTime;
+        [Range(0f, 100f)] public float SmoothTime;
+        public Transform Target;
+        public Transform Handler;
     }
 }

@@ -1,14 +1,14 @@
 ﻿using Source.Core;
+using Source.Interfaces;
 using UnityEngine;
 
 namespace Source.EntityComponents.SmoothTransformRotateComponent
 {
-    [CreateAssetMenu(fileName = "SmoothRotateConfig", menuName = "config/component/smoothrotate", order = 0)]
-    public class SmoothTransformRotateConfig : EmptyComponentConfig
+    [System.Serializable]
+    public class SmoothTransformRotateConfig : ICustomComponentConfig
     {
-        [SerializeField] private float _rotateAngle;
-        [SerializeField] private float _rotateTime;
-        public float RotateAngle => _rotateAngle;
-        public float RotateTime => _rotateTime;
+        public float RotateAngle;
+        public float RotateTime;
+        public Transform RotatedTransform;
     }
 }

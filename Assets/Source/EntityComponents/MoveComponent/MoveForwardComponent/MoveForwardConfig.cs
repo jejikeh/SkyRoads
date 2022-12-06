@@ -1,16 +1,15 @@
 ﻿using Source.Core;
+using Source.Interfaces;
 using UnityEngine;
 
 namespace Source.EntityComponents.MoveComponent.MoveForwardComponent
 {
-    [CreateAssetMenu(fileName = "MoveForwardConfig", menuName = "config/component/moveforward", order = 0)]
-
-    public class MoveForwardConfig : EmptyComponentConfig
+    [System.Serializable]
+    public class MoveForwardConfig : ICustomComponentConfig
     {
-        public float MovingSpeed => _movingSpeed;
-        public Vector3 MoveDirection => _moveDirection;
-        
-        [SerializeField] private float _movingSpeed;
-        [SerializeField] private Vector3 _moveDirection;
+        public float MovingSpeed;
+        public Vector3 MoveDirection;
+
+        public Transform Handler;
     }
 }

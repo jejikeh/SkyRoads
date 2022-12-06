@@ -1,16 +1,23 @@
-﻿using Source.Core;
+﻿using System;
+using Source.Interfaces;
 using UnityEngine;
 
 namespace Source.EntityComponents.CameraFovChangerComponent
 {
-    [CreateAssetMenu(fileName = "CameraFovChanger", menuName = "config/component/camerafovchanger", order = 0)]
-    public class CameraFovChangerConfig : EmptyComponentConfig
+    [Serializable]
+    public class CameraFovChangerConfig : ICustomComponentConfig
     {
-        public float DefaultFov => _defaultFov;
-        public float AffectByFovBoost => _affectByFovBoost;
-        public float AffectByFovStop => _affectByFovStop;
-        [SerializeField] private float _defaultFov;
-        [SerializeField] private float _affectByFovBoost;
-        [SerializeField] private float _affectByFovStop;
+        public float DefaultFov;
+        public float AffectByFovBoost;
+        public float AffectByFovStop;
+        public UnityEngine.Camera Camera;
+        
+        public CameraFovChangerConfig(float affectByFovStop, float affectByFovBoost, float defaultFov, UnityEngine.Camera camera)
+        {
+            AffectByFovStop = affectByFovStop;
+            AffectByFovBoost = affectByFovBoost;
+            DefaultFov = defaultFov;
+            Camera = camera;
+        }
     }
 }

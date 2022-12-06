@@ -1,8 +1,9 @@
 ﻿using System;
+using Source.Interfaces;
 
 namespace Source.Core.CustomException
 {
-    public class EntityDoesntHaveRequiredConfig<T> : Exception where T : EmptyComponentConfig
+    public class EntityDoesntHaveRequiredConfig<T> : Exception where T : ICustomComponentConfig
     {
         private const string ExceptionMessage = "The entity does not have the required config";
         public EntityDoesntHaveRequiredConfig() { }

@@ -1,4 +1,7 @@
 ﻿using Source.Core;
+using Source.EntityComponents.SmoothFollowComponents.SmoothFollowTargetComonent;
+using Source.EntityComponents.SmoothFollowComponents.SmoothFollowTargetComponent;
+using Source.EntityComponents.SmoothFollowComponents.SmoothLookAtTargetComponent;
 using Source.Interfaces;
 using UnityEngine;
 
@@ -6,18 +9,12 @@ namespace Source.EntityComponents.SmoothFollowTargetComponent
 {
     public class SmoothLookAt : EntityComponent<SmoothLookAtTargetConfig>
     {
-        private Transform _target;
-        public SmoothLookAt(IComponentHandler entity, Transform target) : base(entity)
-        {
-            _target = target;
-        }
-
-        public override void Start() { }
-
+        public SmoothLookAt(SmoothLookAtTargetConfig config) : base(config) { }
+        
         public override void Update(float timeScale)
         {
-            var targetRotation = Quaternion.LookRotation(_target.transform.position - Entity.transform.position);
-            Entity.transform.rotation = Quaternion.Slerp(Entity.transform.rotation, targetRotation, Config.SmoothTime * Time.deltaTime);
+            var targetRotation = Quaternion.LookRotation(Config.Target.position - Config.Handler.position);
+            Config.Handler.rotation = Quaternion.Slerp(Config.Handler.rotation, targetRotation, Config.SmoothTime * Time.deltaTime);
         }
     }
 }

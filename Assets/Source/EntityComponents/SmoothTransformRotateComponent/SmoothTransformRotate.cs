@@ -8,26 +8,21 @@ namespace Source.EntityComponents.SmoothTransformRotateComponent
 {
     public class SmoothTransformRotate : EntityComponent<SmoothTransformRotateConfig>
     {
-        private readonly Transform _rotatedTransform;
-        public SmoothTransformRotate(IComponentHandler entity, Transform rotatedTransform) : base(entity)
-        {
-            _rotatedTransform = rotatedTransform;
-        }
+        public SmoothTransformRotate(SmoothTransformRotateConfig config) : base(config) { }
 
         public void Rotate(Vector3 direction)
         {
-            _rotatedTransform.DOLocalRotate(
+            Config.RotatedTransform.DOLocalRotate(
                 new Vector3(
-                    (-direction.y * Config.RotateAngle / 2) / MoveComponentsBoostMultiplier.BoostSpeedMultiplier,
+                    (-direction.y * Config.RotateAngle / 2) / GlobalSpeedBoostMultiplier.BoostSpeedMultiplier,
                     0,
-                    -direction.x * Config.RotateAngle / MoveComponentsBoostMultiplier.BoostSpeedMultiplier), Config.RotateTime);
+                    -direction.x * Config.RotateAngle / GlobalSpeedBoostMultiplier.BoostSpeedMultiplier), Config.RotateTime);
         }
         
         public void RotateBeyond360(Vector3 direction)
         {
-            _rotatedTransform.DOLocalRotate(direction, Config.RotateTime, RotateMode.FastBeyond360).SetLoops(-1, LoopType.Incremental).SetEase(Ease.Linear);
+            Config.RotatedTransform.DOLocalRotate(direction, Config.RotateTime, RotateMode.FastBeyond360).SetLoops(-1, LoopType.Incremental).SetEase(Ease.Linear);
         }
-        public override void Start() { }
         public override void Update(float timeScale) { }
     }
 }
