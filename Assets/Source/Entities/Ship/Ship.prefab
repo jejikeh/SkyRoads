@@ -57,13 +57,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11c14e8a9d0d4bd4a2f07699a9fed64b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _limitMinXPosition: -4
-  _limitMaxXPosition: 4
-  _limitMinYPosition: 1.5
-  _limitMaxYPosition: 4
   _playerInputUser: {fileID: 421756803834890825}
   _moveByLeftRightDirectionConfig:
     Speed: 10
+    Handler: {fileID: 421756803834890830}
+  _clampPositionConfig:
+    LimitMinXPosition: -4
+    LimitMaxXPosition: 4
+    LimitMinYPosition: 1.5
+    LimitMaxYPosition: 4
     Handler: {fileID: 421756803834890830}
 --- !u!1 &421756805485597322
 GameObject:
@@ -111,6 +113,8 @@ GameObject:
   - component: {fileID: 1790734658308976950}
   - component: {fileID: 1790734658316990000}
   - component: {fileID: 1290668510297672573}
+  - component: {fileID: 8435091324500764316}
+  - component: {fileID: 3618399584598845462}
   m_Layer: 0
   m_Name: ShipPresentation
   m_TagString: Untagged
@@ -221,7 +225,37 @@ MonoBehaviour:
     RotateAngle: 45
     RotateTime: 0.5
     RotatedTransform: {fileID: 1790734658306683862}
-  _smoothLookAtTargetConfig:
-    SmoothTime: 1
-    Target: {fileID: 421756803834890830}
-    Handler: {fileID: 1790734658306683862}
+  _boxColliderSizeChangerComponentConfig:
+    Collider: {fileID: 8435091324500764316}
+    DefaultSize: {x: 1.5, y: 0.25, z: 1}
+    MaxSize: {x: 2.1, y: 0.25, z: 1}
+    MinSize: {x: 1, y: 0.2, z: 1}
+--- !u!65 &8435091324500764316
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790734658306977782}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.25, z: 1}
+  m_Center: {x: 0.00019288063, y: 0.035624877, z: -0.51}
+--- !u!54 &3618399584598845462
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790734658306977782}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

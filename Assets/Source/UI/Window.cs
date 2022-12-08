@@ -1,12 +1,28 @@
-﻿using UnityEngine;
+﻿using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Source.UI
 {
     public class Window : MonoBehaviour
     {
-        public void Close()
+        public async Task OnOpenStart()
         {
-            Destroy(gameObject);
+            
+        }
+
+        public async Task OnOpenComplete()
+        {
+            
+        }
+
+        public async Task OnDestroyStart()
+        {
+            
+        }
+
+        public async Task OnDestroyComplete()
+        {
+            
         }
     }
 }

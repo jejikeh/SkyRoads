@@ -1,20 +1,18 @@
 ﻿using Source.Core;
-using Source.EntityComponents.CameraFovChangerComponent;
-using Source.EntityComponents.SmoothFollowComponents.SmoothFollowTargetComonent;
-using Source.EntityComponents.SmoothFollowComponents.SmoothFollowTargetComponent;
+using Source.EntityComponents;
 using UnityEngine;
 
 namespace Source.Entities.Camera
 {
     public class SmoothCamera : Entity
     {
-        [SerializeField] private CameraFovChangerConfig _cameraFovChangerConfig;
-        [SerializeField] private SmoothFollowTargetConfig _smoothFollowTargetConfig;
+        [SerializeField] private CameraSpeedFovChangerComponent.CameraSpeedFovChangerEntityComponentConfig CameraFovChangerEntityComponentConfig;
+        [SerializeField] private SmoothFollowTargetComponent.SmoothFollowTargetConfig _smoothFollowTargetConfig;
 
         private void Start()
         {
-            AddCustomComponent(new SmoothFollowTarget(_smoothFollowTargetConfig));
-            AddCustomComponent(new CameraSpeedFovChanger(_cameraFovChangerConfig));
+            AddCustomComponent(new SmoothFollowTargetComponent(_smoothFollowTargetConfig));
+            AddCustomComponent(new CameraSpeedFovChangerComponent(CameraFovChangerEntityComponentConfig));
         }
 
         private void FixedUpdate()

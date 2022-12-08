@@ -1,6 +1,6 @@
 ﻿using Source.Core;
-using Source.EntityComponents.MaterialUVOffsetComponent;
-using Source.EntityComponents.MoveComponent;
+using Source.EntityComponents;
+using Source.Managers;
 using UnityEngine;
 
 namespace Source.Entities.FakeMovingRoad
@@ -11,7 +11,7 @@ namespace Source.Entities.FakeMovingRoad
         
         private void Awake()
         {
-            var materialUVOffsetConfig = new MaterialUVOffsetConfig
+            var materialUVOffsetConfig = new MaterialUVOffsetComponent.MaterialUVOffsetEntityComponentConfig
             {
                 Material = _roadMaterial,
                 MainTexId = "_MainTex",
@@ -20,7 +20,7 @@ namespace Source.Entities.FakeMovingRoad
                 EmissionTexId = "_EmissionTex"
             };
             
-            AddCustomComponent(new MaterialUVOffset(materialUVOffsetConfig));
+            AddCustomComponent(new MaterialUVOffsetComponent(materialUVOffsetConfig));
         }
 
         private void Update()

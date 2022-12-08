@@ -1,9 +1,6 @@
+using System;
 using Source.Core;
-using Source.EntityComponents.SmoothFollowComponents.SmoothFollowTargetComonent;
-using Source.EntityComponents.SmoothFollowComponents.SmoothFollowTargetComponent;
-using Source.EntityComponents.SmoothFollowComponents.SmoothLookAtTargetComponent;
-using Source.EntityComponents.SmoothFollowTargetComponent;
-using Source.EntityComponents.SmoothTransformRotateComponent;
+using Source.EntityComponents;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,28 +10,49 @@ namespace Source.Entities.Ship
     {
         [SerializeField] private PlayerInputUser _playerInputUser;
 
-        [SerializeField] private SmoothFollowTargetConfig _followTargetConfig;
-        [SerializeField] private SmoothTransformRotateConfig _transformRotateConfig;
-        [SerializeField] private SmoothLookAtTargetConfig _smoothLookAtTargetConfig;
+        [SerializeField] private SmoothFollowTargetComponent.SmoothFollowTargetConfig _followTargetConfig;
+        [SerializeField] private SmoothTransformRotateComponent.SmoothTransformRotateConfig _transformRotateConfig;
+        [SerializeField]
+        private BoxColliderSizeChangerComponent.BoxColliderSizeChangerComponentConfig
+            _boxColliderSizeChangerComponentConfig;
         
         private void Start()
         {
-            AddCustomComponent(new SmoothFollowTarget(_followTargetConfig));
-            AddCustomComponent(new SmoothTransformRotate(_transformRotateConfig));
-            AddCustomComponent(new SmoothLookAt(_smoothLookAtTargetConfig));
+            AddCustomComponent(new SmoothFollowTargetComponent(_followTargetConfig));
+            AddCustomComponent(new SmoothTransformRotateComponent(_transformRotateConfig));
+            var boxColliderSizeChangerComponent =AddCustomComponent(new BoxColliderSizeChangerComponent(_boxColliderSizeChangerComponentConfig));
 
             _playerInputUser.Input.Player.Move.performed += RotateOnPerformMoveAction;
             _playerInputUser.Input.Player.Move.canceled += RotateOnPerformMoveAction;
+
+            _playerInputUser.Input.Player.BoostSpeedMode.performed += _ => boxColliderSizeChangerComponent.Boost();
+            _playerInputUser.Input.Player.DefaultSpeedMode.performed += _ => boxColliderSizeChangerComponent.Default();
+            _playerInputUser.Input.Player.StopSpeedMode.performed += _ => boxColliderSizeChangerComponent.Stop();
         }
         
         private void RotateOnPerformMoveAction(InputAction.CallbackContext obj)
         {
-            GetCustomComponent<SmoothTransformRotate>().Rotate(obj.ReadValue<Vector2>());
+            GetCustomComponent<SmoothTransformRotateComponent>().Rotate(obj.ReadValue<Vector2>());
         }
 
         private void FixedUpdate()
         {
             UpdateComponents();
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            Debug.Log("AA");
+        }
+
+        private void OnDestroy()
+        {
+            _playerInputUser.Input.Player.Move.performed -= RotateOnPerformMoveAction;
+            _playerInputUser.Input.Player.Move.canceled -= RotateOnPerformMoveAction;
+
+            _playerInputUser.Input.Player.BoostSpeedMode.performed += _ => GetCustomComponent<BoxColliderSizeChangerComponent>().Boost();
+            _playerInputUser.Input.Player.DefaultSpeedMode.performed += _ => GetCustomComponent<BoxColliderSizeChangerComponent>().Default();
+            _playerInputUser.Input.Player.StopSpeedMode.performed += _ => GetCustomComponent<BoxColliderSizeChangerComponent>().Stop();
         }
     }
 }

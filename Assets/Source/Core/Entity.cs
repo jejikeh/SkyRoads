@@ -8,7 +8,7 @@ namespace Source.Core
 {
     public abstract class Entity : MonoBehaviour, IComponentHandler
     {
-        public ICustomComponent AddCustomComponent(ICustomComponent component)
+        public T AddCustomComponent<T>(T component) where T : ICustomComponent
         {
             var requiredComponent = _components.FirstOrDefault(x => component.GetType() == x.GetType());
             if (requiredComponent is not null)

@@ -1,9 +1,6 @@
-﻿using System.Threading;
-using UnityEngine;
-
-namespace Source.Interfaces
+﻿namespace Source.Interfaces
 {
-    public interface ICustomComponent
+    public interface  ICustomComponent
     {
         public void Update(float timeScale);
         public void Enable();

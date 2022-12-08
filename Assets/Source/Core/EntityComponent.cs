@@ -3,7 +3,9 @@ using Source.Interfaces;
 
 namespace Source.Core
 {
-    public abstract class EntityComponent<T> :  ICustomComponent where T : ICustomComponentConfig 
+    public class EmptyConfig : ICustomComponentConfig { }
+
+    public abstract class EntityComponent<T> : ICustomComponent where T : ICustomComponentConfig
     {
         public bool Enabled => _enabled;
         
