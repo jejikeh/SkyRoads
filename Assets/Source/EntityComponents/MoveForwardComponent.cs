@@ -20,7 +20,7 @@ namespace Source.EntityComponents
         
         public override void Update(float timeScale)
         {
-            Config.Handler.Translate(Config.MoveDirection * (Config.MovingSpeed * GlobalSpeedBoostMultiplier.BoostSpeedMultiplier * Time.deltaTime));
+            Config.Handler.Translate(Config.MoveDirection * (Config.MovingSpeed * GameManager.BoostSpeedMultiplierManager.BoostSpeedMultiplier * Time.deltaTime));
         }
     }
 }

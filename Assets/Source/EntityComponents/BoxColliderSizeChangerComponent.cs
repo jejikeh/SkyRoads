@@ -4,6 +4,7 @@ using Source.Core;
 using Source.Interfaces;
 using Source.Managers;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Source.EntityComponents
 {
@@ -20,34 +21,33 @@ namespace Source.EntityComponents
         
         public BoxColliderSizeChangerComponent(BoxColliderSizeChangerComponentConfig cameraSpeedFovChangerEntityComponentConfig) : base(cameraSpeedFovChangerEntityComponentConfig) { }
 
-        public void Boost()
+        public void Boost(InputAction.CallbackContext context)
         {
-            DOVirtual.Vector3(Config.Collider.size, Config.MinSize, GlobalSpeedBoostMultiplier.ChangeSpeedDuration,
+            DOVirtual.Vector3(Config.Collider.size, Config.MinSize, GameManager.BoostSpeedMultiplierManager.ChangeSpeedDuration,
                 newSize =>
                 {
                     Config.Collider.size = newSize;
                 });
         }
         
-        public void Default()
+        public void Default(InputAction.CallbackContext context)
         {
-            DOVirtual.Vector3(Config.Collider.size, Config.DefaultSize, GlobalSpeedBoostMultiplier.ChangeSpeedDuration,
+            DOVirtual.Vector3(Config.Collider.size, Config.DefaultSize, GameManager.BoostSpeedMultiplierManager.ChangeSpeedDuration,
                 newSize =>
                 {
                     Config.Collider.size = newSize;
                 });
         }
         
-        public void Stop()
+        public void Stop(InputAction.CallbackContext context)
         {
-            DOVirtual.Vector3(Config.Collider.size, Config.MaxSize, GlobalSpeedBoostMultiplier.ChangeSpeedDuration,
+            DOVirtual.Vector3(Config.Collider.size, Config.MaxSize, GameManager.BoostSpeedMultiplierManager.ChangeSpeedDuration,
                 newSize =>
                 {
                     Config.Collider.size = newSize;
                 });
         }
         
-        public override void Update(float timeScale)
-        { }
+        public override void Update(float timeScale) { }
     }
 }

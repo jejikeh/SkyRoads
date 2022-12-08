@@ -32,7 +32,7 @@ namespace Source.Entities.ObjectSpawner
             {
                 Spawn();
                 _currentTime = 0;
-                _randomAsteroidRespawnTime = Random.Range(0, _maxSpawnTimer / GlobalSpeedBoostMultiplier.BoostSpeedMultiplier);
+                _randomAsteroidRespawnTime = Random.Range(0, _maxSpawnTimer / GameManager.BoostSpeedMultiplierManager.BoostSpeedMultiplier);
             }
 
         }

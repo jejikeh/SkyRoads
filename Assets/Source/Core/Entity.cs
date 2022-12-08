@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Source.Core.CustomException;
@@ -8,6 +9,13 @@ namespace Source.Core
 {
     public abstract class Entity : MonoBehaviour, IComponentHandler
     {
+        /// <summary>
+        /// Add Custom component to entity
+        /// </summary>
+        /// <param name="component"></param>
+        /// <typeparam name="T">added component</typeparam>
+        /// <returns></returns>
+        /// <exception cref="EntityAlreadyHasComponentOfThisClass"></exception>
         public T AddCustomComponent<T>(T component) where T : ICustomComponent
         {
             var requiredComponent = _components.FirstOrDefault(x => component.GetType() == x.GetType());
@@ -17,13 +25,23 @@ namespace Source.Core
             _components.Add(component);
             return component;
         }
-
+        
+        /// <summary>
+        /// Removes component by specific type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
         public void RemoveCustomComponent<T>() where T : class, ICustomComponent
         {
             var component = GetCustomComponent<T>();
             _components.Remove(component);
         }
         
+        /// <summary>
+        /// Returns entity component by class 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        /// <exception cref="EntityDoesntHaveRequiredComponent{T}"></exception>
         public T GetCustomComponent<T>() where T : class, ICustomComponent
         {
             var requiredComponent = _components.FirstOrDefault(x => typeof(T) == x.GetType());
@@ -85,6 +103,11 @@ namespace Source.Core
             foreach (var component in _components)
                 component.Enable();
         }
-        
+
+        protected virtual void OnDestroy()
+        {
+            foreach (var component in _components)
+                component.Destroy();
+        }
     }
 }

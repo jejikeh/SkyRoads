@@ -19,7 +19,7 @@ namespace Source.EntityComponents
 
         public void Turn(Vector3 direction)
         {
-            Config.Handler.Translate(direction * (Config.Speed / GlobalSpeedBoostMultiplier.BoostSpeedMultiplier * Time.deltaTime));
+            Config.Handler.Translate(direction * (Config.Speed / GameManager.BoostSpeedMultiplierManager.BoostSpeedMultiplier * Time.deltaTime));
         }
         
         public override void Update(float timeScale) { }

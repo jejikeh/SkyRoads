@@ -15,6 +15,7 @@ namespace Source.Core
         
         protected virtual void OnEnable() { }
         protected virtual void OnDisable() { }
+        protected virtual void OnDestroy() { }
         
         /// <summary>
         /// Enable component
@@ -32,6 +33,11 @@ namespace Source.Core
         {
             _enabled = false;
             OnDisable();
+        }
+
+        public void Destroy()
+        {
+            OnDestroy();
         }
         
         #endregion

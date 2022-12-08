@@ -33,7 +33,7 @@ namespace Source.EntityComponents
         {
             var desiredPosition = Config.Target.position + Config.Offset;
             if (Config.AffectBySpeed)
-                desiredPosition -= Vector3.forward * GlobalSpeedBoostMultiplier.BoostSpeedMultiplier;
+                desiredPosition -= Vector3.forward * GameManager.BoostSpeedMultiplierManager.BoostSpeedMultiplier;
             Config.Handler.position = Vector3.SmoothDamp(Config.Handler.position, desiredPosition, ref _velocity, Config.SmoothTime * Time.deltaTime);
         }
     }

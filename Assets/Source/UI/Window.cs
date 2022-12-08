@@ -1,28 +1,42 @@
 ﻿using System.Threading.Tasks;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Source.UI
 {
     public class Window : MonoBehaviour
     {
-        public async Task OnOpenStart()
+        [CanBeNull] protected object UnparsedData;
+        
+        public async Task OpenStartAsync(object data)
         {
-            
+            UnparsedData = data;
+            await OnOpenStart();
         }
 
-        public async Task OnOpenComplete()
+        public async Task OpenStartAsync()
         {
-            
+            await OnOpenStart();
         }
 
-        public async Task OnDestroyStart()
+        public async Task OpenCompleteAsync()
         {
-            
+            await OnOpenComplete();
         }
 
-        public async Task OnDestroyComplete()
+        public async Task CloseStartAsync()
         {
-            
+            await OnCloseStart();
         }
+
+        public async Task CloseCompleteAsync()
+        {
+            await OpenCompleteAsync();
+        }
+
+        protected virtual async Task OnOpenStart() { }
+        protected virtual async Task OnOpenComplete() { }
+        protected virtual async Task OnCloseStart() { }
+        protected virtual async Task OnCloseComplete() { }
     }
 }

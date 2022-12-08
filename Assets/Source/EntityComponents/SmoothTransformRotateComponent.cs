@@ -21,9 +21,9 @@ namespace Source.EntityComponents
         public void Rotate(Vector3 direction)
         {
             var rotatedVector = new Vector3(
-                (-direction.y * Config.RotateAngle / 2) / GlobalSpeedBoostMultiplier.BoostSpeedMultiplier,
+                (-direction.y * Config.RotateAngle / 2) / GameManager.BoostSpeedMultiplierManager.BoostSpeedMultiplier,
                 0,
-                -direction.x * Config.RotateAngle / GlobalSpeedBoostMultiplier.BoostSpeedMultiplier);
+                -direction.x * Config.RotateAngle / GameManager.BoostSpeedMultiplierManager.BoostSpeedMultiplier);
             Config.RotatedTransform.DOLocalRotate(rotatedVector, Config.RotateTime);
         }
         

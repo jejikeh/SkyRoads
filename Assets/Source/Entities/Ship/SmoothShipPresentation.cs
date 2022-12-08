@@ -1,6 +1,6 @@
-using System;
 using Source.Core;
 using Source.EntityComponents;
+using Source.Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,8 +8,6 @@ namespace Source.Entities.Ship
 {
     public class SmoothShipPresentation : Entity
     {
-        [SerializeField] private PlayerInputUser _playerInputUser;
-
         [SerializeField] private SmoothFollowTargetComponent.SmoothFollowTargetConfig _followTargetConfig;
         [SerializeField] private SmoothTransformRotateComponent.SmoothTransformRotateConfig _transformRotateConfig;
         [SerializeField]
@@ -22,12 +20,12 @@ namespace Source.Entities.Ship
             AddCustomComponent(new SmoothTransformRotateComponent(_transformRotateConfig));
             var boxColliderSizeChangerComponent =AddCustomComponent(new BoxColliderSizeChangerComponent(_boxColliderSizeChangerComponentConfig));
 
-            _playerInputUser.Input.Player.Move.performed += RotateOnPerformMoveAction;
-            _playerInputUser.Input.Player.Move.canceled += RotateOnPerformMoveAction;
+            GameManager.PlayerInputUserManager.Input.Player.Move.performed += RotateOnPerformMoveAction;
+            GameManager.PlayerInputUserManager.Input.Player.Move.canceled += RotateOnPerformMoveAction;
 
-            _playerInputUser.Input.Player.BoostSpeedMode.performed += _ => boxColliderSizeChangerComponent.Boost();
-            _playerInputUser.Input.Player.DefaultSpeedMode.performed += _ => boxColliderSizeChangerComponent.Default();
-            _playerInputUser.Input.Player.StopSpeedMode.performed += _ => boxColliderSizeChangerComponent.Stop();
+            GameManager.PlayerInputUserManager.Input.Player.BoostSpeedMode.performed += boxColliderSizeChangerComponent.Boost;
+            GameManager.PlayerInputUserManager.Input.Player.DefaultSpeedMode.performed += boxColliderSizeChangerComponent.Default;
+            GameManager.PlayerInputUserManager.Input.Player.StopSpeedMode.performed += boxColliderSizeChangerComponent.Stop;
         }
         
         private void RotateOnPerformMoveAction(InputAction.CallbackContext obj)
@@ -41,18 +39,21 @@ namespace Source.Entities.Ship
         }
 
         private void OnTriggerEnter(Collider other)
-        {
-            Debug.Log("AA");
+        { 
+            Debug.Log("DD");
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
-            _playerInputUser.Input.Player.Move.performed -= RotateOnPerformMoveAction;
-            _playerInputUser.Input.Player.Move.canceled -= RotateOnPerformMoveAction;
+            base.OnDestroy();
+            
+            GameManager.PlayerInputUserManager.Input.Player.Move.performed -= RotateOnPerformMoveAction;
+            GameManager.PlayerInputUserManager.Input.Player.Move.canceled -= RotateOnPerformMoveAction;
 
-            _playerInputUser.Input.Player.BoostSpeedMode.performed += _ => GetCustomComponent<BoxColliderSizeChangerComponent>().Boost();
-            _playerInputUser.Input.Player.DefaultSpeedMode.performed += _ => GetCustomComponent<BoxColliderSizeChangerComponent>().Default();
-            _playerInputUser.Input.Player.StopSpeedMode.performed += _ => GetCustomComponent<BoxColliderSizeChangerComponent>().Stop();
+            var boxColliderSizeChangerComponent = GetCustomComponent<BoxColliderSizeChangerComponent>();
+            GameManager.PlayerInputUserManager.Input.Player.BoostSpeedMode.performed -= boxColliderSizeChangerComponent.Boost;
+            GameManager.PlayerInputUserManager.Input.Player.DefaultSpeedMode.performed -= boxColliderSizeChangerComponent.Default;
+            GameManager.PlayerInputUserManager.Input.Player.StopSpeedMode.performed -= boxColliderSizeChangerComponent.Stop;
         }
     }
 }

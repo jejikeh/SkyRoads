@@ -25,7 +25,7 @@ namespace Source.Entities.FakeMovingRoad
 
         private void Update()
         {
-            UpdateComponents(GlobalSpeedBoostMultiplier.BoostSpeedMultiplier);
+            UpdateComponents(GameManager.BoostSpeedMultiplierManager.BoostSpeedMultiplier);
         }
     }
 }
