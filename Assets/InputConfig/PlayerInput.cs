@@ -51,7 +51,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""id"": ""f079984e-803c-4b93-8b31-8c07973eca86"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""MultiTap,Hold(duration=0.2)"",
+                    ""interactions"": ""Hold(duration=0.2)"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -60,7 +60,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""id"": ""2d709507-c63f-4724-a748-fde4a68ba799"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""MultiTap,Press(behavior=1)"",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -69,7 +69,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""id"": ""1820f1fb-e758-4732-91ef-3cb073d913d6"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""MultiTap,Hold(duration=0.2)"",
+                    ""interactions"": ""Hold(duration=0.2)"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -186,6 +186,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""f8321952-2d7b-4546-b20a-773f1c98c58e"",
+                    ""path"": ""<HID::Microntek              USB Joystick          >/stick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""13e99e68-465d-4cb0-9e9c-527a1dff36ef"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": ""Hold"",
@@ -202,6 +213,28 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""PC"",
+                    ""action"": ""BoostSpeedMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""35c36f4f-1ce9-4cdf-9b8f-537f209723ca"",
+                    ""path"": ""<HID::Microntek              USB Joystick          >/button6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""BoostSpeedMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""69d64165-70f7-4479-bcca-40a12531604c"",
+                    ""path"": ""<HID::Microntek              USB Joystick          >/button3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""BoostSpeedMode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -230,11 +263,77 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""6bcfe255-d630-4ab0-9c86-38b865985044"",
+                    ""path"": ""<HID::Microntek              USB Joystick          >/button6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DefaultSpeedMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f9cad5ce-ed5d-4644-b6c3-7b569d9abeaa"",
+                    ""path"": ""<HID::Microntek              USB Joystick          >/button5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DefaultSpeedMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b09c7b37-198e-462d-b0b0-24323332f1ef"",
+                    ""path"": ""<HID::Microntek              USB Joystick          >/button3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DefaultSpeedMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""05da5bad-cb21-4949-adc6-75a2c88bc888"",
+                    ""path"": ""<HID::Microntek              USB Joystick          >/button4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DefaultSpeedMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""864c01a4-f395-4ae1-95c7-874cb2d314b4"",
                     ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""PC"",
+                    ""action"": ""StopSpeedMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""181f56ff-d6e3-4be4-8e50-315ad6d06378"",
+                    ""path"": ""<HID::Microntek              USB Joystick          >/button5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""StopSpeedMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""09575b94-2bd5-4dc3-814a-3a001ecd3d57"",
+                    ""path"": ""<HID::Microntek              USB Joystick          >/button4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""StopSpeedMode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -254,6 +353,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Gamepad"",
+            ""bindingGroup"": ""Gamepad"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
@@ -395,6 +505,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         {
             if (m_PCSchemeIndex == -1) m_PCSchemeIndex = asset.FindControlSchemeIndex("PC");
             return asset.controlSchemes[m_PCSchemeIndex];
+        }
+    }
+    private int m_GamepadSchemeIndex = -1;
+    public InputControlScheme GamepadScheme
+    {
+        get
+        {
+            if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
+            return asset.controlSchemes[m_GamepadSchemeIndex];
         }
     }
     public interface IPlayerActions

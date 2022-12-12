@@ -1,59 +1,92 @@
 ﻿using System;
 using DG.Tweening;
+using Source.Core;
+using Source.Interfaces;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Source.Managers
 {
-    public class BoostSpeedMultiplierManager : MonoBehaviour
+    [Serializable]
+    public class BoostSpeedMultiplierManagerConfig : ICustomComponentConfig
+    {
+        public Ease _boostEase;
+        public float _duration;
+        public float _defaultSpeedMultiplier;
+        public float _boostSpeedMultiplier;
+        public float _stopSpeedMultiplier;
+    }
+    public class BoostSpeedMultiplierManager : EntityComponent<BoostSpeedMultiplierManagerConfig>
     {
         public float BoostSpeedMultiplier { get; private set; }
         public float ChangeSpeedDuration { get; private set; }
-        
-        [SerializeField] private Ease _boostEase;
-        [SerializeField] private float _duration;
-        [SerializeField] private float _defaultSpeedMultiplier;
-        [SerializeField] private float _boostSpeedMultiplier;
-        [SerializeField] private float _stopSpeedMultiplier;
-        private void Start()
+
+
+        public BoostSpeedMultiplierManager(BoostSpeedMultiplierManagerConfig componentConfig) : base(componentConfig)
         {
-            BoostSpeedMultiplier = _defaultSpeedMultiplier;
-            ChangeSpeedDuration = _duration;
+            BoostSpeedMultiplier = ComponentConfig._defaultSpeedMultiplier;
+            ChangeSpeedDuration = ComponentConfig._duration;
             
-            GameManager.PlayerInputUserManager.Input.Player.BoostSpeedMode.performed += Boost;
-            GameManager.PlayerInputUserManager.Input.Player.DefaultSpeedMode.performed += Default;
-            GameManager.PlayerInputUserManager.Input.Player.StopSpeedMode.performed += Stop;
+            GameManager.Input.Player.BoostSpeedMode.performed += Boost;
+            GameManager.Input.Player.DefaultSpeedMode.performed += Default;
+            GameManager.Input.Player.StopSpeedMode.performed += Stop;
         }
 
         private void Boost(InputAction.CallbackContext context)
         {
-            DOVirtual.Float(BoostSpeedMultiplier, _defaultSpeedMultiplier * _boostSpeedMultiplier, _duration, newSpeed =>
+            Debug.Log("DD");
+            DOVirtual.Float(BoostSpeedMultiplier, ComponentConfig._boostSpeedMultiplier, ComponentConfig._duration, newSpeed =>
             {
                 BoostSpeedMultiplier = newSpeed;
-            }).SetEase(_boostEase);
+            }).SetEase(ComponentConfig._boostEase);
         }
         
         private void Default(InputAction.CallbackContext context)
         {
-            DOVirtual.Float(BoostSpeedMultiplier, _defaultSpeedMultiplier, _duration, newSpeed =>
+            DOVirtual.Float(BoostSpeedMultiplier, ComponentConfig._defaultSpeedMultiplier, ComponentConfig._duration, newSpeed =>
             {
                 BoostSpeedMultiplier = newSpeed;
-            }).SetEase(_boostEase);
+            }).SetEase(ComponentConfig._boostEase);
         }
         
-        private void Stop(InputAction.CallbackContext context)
+        public void Stop(InputAction.CallbackContext context)
         {
-            DOVirtual.Float(BoostSpeedMultiplier,  _defaultSpeedMultiplier * _stopSpeedMultiplier, _duration, newSpeed =>
+            DOVirtual.Float(BoostSpeedMultiplier,  ComponentConfig._stopSpeedMultiplier, ComponentConfig._duration, newSpeed =>
             {
                 BoostSpeedMultiplier = newSpeed;
-            }).SetEase(_boostEase);
+            }).SetEase(ComponentConfig._boostEase);
         }
-
-        private void OnDestroy()
+        
+        public void Reset()
         {
-            GameManager.PlayerInputUserManager.Input.Player.BoostSpeedMode.performed -= Boost;
-            GameManager.PlayerInputUserManager.Input.Player.DefaultSpeedMode.performed -= Default;
-            GameManager.PlayerInputUserManager.Input.Player.StopSpeedMode.performed -= Stop;
+            GameManager.Input.Player.BoostSpeedMode.performed -= Boost;
+            GameManager.Input.Player.DefaultSpeedMode.performed -= Default;
+            GameManager.Input.Player.StopSpeedMode.performed -= Stop;
+            DOVirtual.Float(BoostSpeedMultiplier,  0.01f, ComponentConfig._duration, newSpeed =>
+            {
+                BoostSpeedMultiplier = newSpeed;
+            }).SetEase(ComponentConfig._boostEase);
+        }
+        
+        public void Init()
+        {
+            GameManager.Input.Player.BoostSpeedMode.performed += Boost;
+            GameManager.Input.Player.DefaultSpeedMode.performed += Default;
+            GameManager.Input.Player.StopSpeedMode.performed += Stop;
+            DOVirtual.Float(BoostSpeedMultiplier,  ComponentConfig._defaultSpeedMultiplier, ComponentConfig._duration, newSpeed =>
+            {
+                BoostSpeedMultiplier = newSpeed;
+            }).SetEase(ComponentConfig._boostEase);
+        }
+        
+        public override void Update(float timeScale) { }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            GameManager.Input.Player.BoostSpeedMode.performed -= Boost;
+            GameManager.Input.Player.DefaultSpeedMode.performed -= Default;
+            GameManager.Input.Player.StopSpeedMode.performed -= Stop;
         }
     }
 }

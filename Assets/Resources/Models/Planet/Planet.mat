@@ -30,7 +30,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Falloff: 1.89
+    - _Falloff: 4.362394
     - _FalloffPlanet: 5
     - _Size: 0.1
     - _Transparency: 15
@@ -38,11 +38,11 @@ Material:
     m_Colors:
     - _AtmoColor: {r: 0.5, g: 0.5, b: 1, a: 1}
     - _AtmosphereColor: {r: 0.5, g: 0.5, b: 1, a: 1}
-    - _Color: {r: 0.7186899, g: 0.9245283, b: 0.81685245, a: 1}
-    - _Color1: {r: 0, g: 0, b: 0, a: 1}
-    - _Color2: {r: 0.20149255, g: 0.16551173, b: 0, a: 1}
-    - _Color3: {r: 0.5669862, g: 0.501246, b: 0.754717, a: 1}
-    - _RimColor: {r: 0.21103594, g: 0.43330923, b: 0.4528302, a: 1}
+    - _Color: {r: 0.13121146, g: 0.07757538, b: 0.1590525, a: 1}
+    - _Color1: {r: 0.39727074, g: 0.6699, b: 0.6200576, a: 1}
+    - _Color2: {r: 0.03325093, g: 0.0268058, b: 0.024402028, a: 1}
+    - _Color3: {r: 0.34193033, g: 0.35443094, b: 0.3539882, a: 1}
+    - _RimColor: {r: 0.7242071, g: 0.66126925, b: 0.86739266, a: 1}
     - _TintColor: {r: 0.5, g: 0.5, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!1002 &2100001

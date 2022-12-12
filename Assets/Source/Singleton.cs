@@ -4,11 +4,11 @@ namespace Source
 {
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
-        private static T Instance { get; set; }
+        public static T Instance { get; set; }
 
-        private void Awake()
+        protected virtual void Awake()
         {
-            if (Instance != null)
+            if (Instance != null && Instance != this)
                 Destroy(gameObject);
 
             Instance = GetComponent<T>();

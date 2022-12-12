@@ -1,20 +1,68 @@
-﻿using System;
+﻿using Source.UI;
+using Source.UI.DeadScreen;
+using Source.UI.GameScreen;
 using UnityEngine;
 
 namespace Source.Managers
 {
-    public class GameManager : Singleton<GameManager>
+    public class GameManager : MonoBehaviour
     {
-        public static BoostSpeedMultiplierManager BoostSpeedMultiplierManager;
-        public static PlayerInputUserManager PlayerInputUserManager;
+        [SerializeField] private BoostSpeedMultiplierManagerConfig _boostSpeedMultiplierManagerConfig;
+        [SerializeField] private ScoreManagerConfig _scoreManagerConfig;
         
-        [SerializeField] private BoostSpeedMultiplierManager _boostSpeedMultiplierManager;
-        [SerializeField] private PlayerInputUserManager _playerInputUserManager;
+        public static PlayerInput Input;
+        public static ScoreManager ScoreManager;
+        public static BoostSpeedMultiplierManager BoostSpeedMultiplierManager;
 
-        private void Start()
+        protected void Awake()
         {
-            BoostSpeedMultiplierManager = _boostSpeedMultiplierManager;
-            PlayerInputUserManager = _playerInputUserManager;
+            Input ??= GetComponent<PlayerInputUserManager>().Init().Input;
+            Input.Enable();
+            
+            BoostSpeedMultiplierManager ??= new BoostSpeedMultiplierManager(_boostSpeedMultiplierManagerConfig);
+            ScoreManager ??= new ScoreManager(_scoreManagerConfig);
+            
+            ScoreManager.Enable();
+            BoostSpeedMultiplierManager.Init();
+        }
+        
+        public static void SetDeadState()
+        {
+            WindowManager.Open<DeadScreen>(ScoreManager.Score);
+            
+            BoostSpeedMultiplierManager.Reset();
+            
+            ScoreManager.Reset();
+            ScoreManager.Disable();
+            
+            Input.Player.Move.Disable();
+        }
+        
+        public static void SetGameState()
+        {
+            WindowManager.Open<GameScreen>(null);
+        }
+        
+        private void Update()
+        {
+            if(ScoreManager.Enabled)
+                ScoreManager.Update(1f);
+        }
+
+        private void OnDestroy()
+        {
+            BoostSpeedMultiplierManager.Destroy();
+            ScoreManager.Destroy();
+        }
+
+        private void OnEnable()
+        {
+            Input?.Enable();
+        }
+
+        private void OnDisable()
+        {
+            Input?.Disable();
         }
     }
 }

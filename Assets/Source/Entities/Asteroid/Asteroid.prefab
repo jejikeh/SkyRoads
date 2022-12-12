@@ -55,11 +55,11 @@ MonoBehaviour:
     RotateAngle: 0
     RotateTime: 0
     RotatedTransform: {fileID: 7857694765374466271}
-  _clampPositionConfig:
-    LimitMinXPosition: -2
-    LimitMaxXPosition: 2
-    LimitMinYPosition: 1
-    LimitMaxYPosition: 3
+  ClampPositionComponentConfig:
+    LimitMinXPosition: -4
+    LimitMaxXPosition: 4
+    LimitMinYPosition: 1.5
+    LimitMaxYPosition: 4
     Handler: {fileID: 7857694764860891664}
 --- !u!65 &6548731931187834326
 BoxCollider:

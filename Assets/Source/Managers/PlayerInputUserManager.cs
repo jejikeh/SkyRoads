@@ -6,19 +6,20 @@ namespace Source.Managers
     {
         public PlayerInput Input { get; private set; }
 
-        private void Awake()
+        public PlayerInputUserManager Init()
         {
             Input = new PlayerInput();
+            return this;
         }
 
         public void OnEnable()
         {
-            Input.Enable();
+            Input?.Enable();
         }
 
         public void OnDisable()
         {
-            Input.Disable();
+            Input?.Disable();
         }
     }
 }
