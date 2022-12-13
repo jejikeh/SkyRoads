@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using System.Threading.Tasks;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Source.UI
@@ -13,7 +14,7 @@ namespace Source.UI
             OpenStart();
         }
 
-        public void OnCloseStart()
+        public async Task OnCloseStart()
         {
             CloseStart();
         }

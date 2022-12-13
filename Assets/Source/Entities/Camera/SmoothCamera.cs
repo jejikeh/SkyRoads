@@ -1,6 +1,4 @@
-﻿using DG.Tweening;
-using Source.Core;
-using Source.EntityComponents;
+﻿using Source.Core;
 using Source.EntityComponents.CameraSpeedFovChanger;
 using Source.EntityComponents.SmoothFollowTarget;
 using Source.EntityComponents.SmoothTransformRotate;

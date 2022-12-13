@@ -3,6 +3,7 @@ using Source.EntityComponents.BoxColliderSizeChanger;
 using Source.EntityComponents.SmoothFollowTarget;
 using Source.EntityComponents.SmoothTransformRotate;
 using Source.Managers;
+using Source.Managers.GameState;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -42,7 +43,7 @@ namespace Source.Entities.Ship
 
         private void OnTriggerEnter(Collider other)
         {
-            GameManager.SetDeadState();
+            GameManager.GameStateManager.SetGameState<DeadState>();
         }
 
         protected override void OnDestroy()

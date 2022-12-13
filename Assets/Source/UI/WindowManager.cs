@@ -14,10 +14,12 @@ namespace Source.UI
 
         private static List<GameObject> _windowsStaticPrefabs;
         
-        private void Start()
+        protected override void Awake()
         {
-            _canvas = GetComponent<Canvas>();
-            _windowsStaticPrefabs = _windowPrefabs;
+            base.Awake();
+            
+            _canvas ??= GetComponent<Canvas>();
+            _windowsStaticPrefabs ??= _windowPrefabs;
         }
 
         public static T Open<T>([CanBeNull] object data) where T : Window
@@ -26,12 +28,14 @@ namespace Source.UI
             var windowPrefab = _windowsStaticPrefabs.Find(x => x.GetComponent<T>() != null);
             var window = Instantiate(windowPrefab, _canvas.transform).GetComponent<T>();
             _windows.Add(window);
-            window.OnOpenStart(data);
             
+            window.OnOpenStart(data);
+
+            // Task.WaitAll();
             return window;
         }
         
-        public async Task Close<T>() where T : MonoBehaviour
+        public static void Close<T>() where T : MonoBehaviour
         {
             var window = _windows.Find(x => x.GetComponent<T>() != null);
             if (window is null)

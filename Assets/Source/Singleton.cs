@@ -8,7 +8,7 @@ namespace Source
 
         protected virtual void Awake()
         {
-            if (Instance != null && Instance != this)
+            if (Instance != null)
                 Destroy(gameObject);
 
             Instance = GetComponent<T>();

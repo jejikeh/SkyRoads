@@ -2,18 +2,29 @@ using System;
 using System.Globalization;
 using DG.Tweening;
 using Source.Managers;
+using Source.Managers.GameState;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 namespace Source.UI.DeadScreen
 {
     [RequireComponent(typeof(PlayerInputUserManager))]
     public class DeadScreen : Window
     {
+        public class DeadScreenData
+        {
+            public float Score;
+            public bool Win;
+
+            public DeadScreenData(float score, bool win)
+            {
+                Score = score;
+                Win = win;
+            }
+        }
+        
         [SerializeField] private TMP_Text _scoreText;
-        private float _score;
+        private DeadScreenData _score;
 
         protected override void OpenStart()
         {
@@ -22,29 +33,21 @@ namespace Source.UI.DeadScreen
             desireSize.localScale = Vector3.zero;
             transform.DOScale(size, 1f);
             
-            if (Data is not null)
-                _score = Convert.ToSingle(Data);
-
-            _scoreText.text = $"Your score: {_score.ToString(CultureInfo.InvariantCulture)}";
-
-            GameManager.Input.Player.BoostSpeedMode.performed += TestEvent;
+            if (Data is DeadScreenData)
+                _score = Data as DeadScreenData;
+            
+            _scoreText.text = $"Your score: {_score?.Score}\n";
+            _scoreText.text += _score.Win ? "You win!" : "You lose";
         }
 
-        private void TestEvent(InputAction.CallbackContext context)
-        {
-            RestartScene();
-        }
-        
         public void RestartScene()
         {
-            WindowManager.CloseAllWindows();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            GameManager.SetGameState();
+            GameManager.GameStateManager.SetGameState<PlayState>();
         }
 
-        private void OnDestroy()
+        public void GoToMainMenu()
         {
-            GameManager.Input.Player.BoostSpeedMode.performed -= TestEvent;
+            GameManager.GameStateManager.SetGameState<MenuState>();
         }
     }
 }

@@ -1,21 +1,9 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using Source.Core;
-using Source.Interfaces;
-using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Source.Managers
+namespace Source.Managers.BoostSpeedMultiplier
 {
-    [Serializable]
-    public class BoostSpeedMultiplierManagerConfig : ICustomComponentConfig
-    {
-        public Ease _boostEase;
-        public float _duration;
-        public float _defaultSpeedMultiplier;
-        public float _boostSpeedMultiplier;
-        public float _stopSpeedMultiplier;
-    }
     public class BoostSpeedMultiplierManager : EntityComponent<BoostSpeedMultiplierManagerConfig>
     {
         public float BoostSpeedMultiplier { get; private set; }
@@ -34,7 +22,6 @@ namespace Source.Managers
 
         private void Boost(InputAction.CallbackContext context)
         {
-            Debug.Log("DD");
             DOVirtual.Float(BoostSpeedMultiplier, ComponentConfig._boostSpeedMultiplier, ComponentConfig._duration, newSpeed =>
             {
                 BoostSpeedMultiplier = newSpeed;

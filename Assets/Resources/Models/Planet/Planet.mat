@@ -22,7 +22,7 @@ Material:
     m_TexEnvs:
     - _Detail:
         m_Texture: {fileID: 2800000, guid: 248ac1f576ea4d344afd0c28aa2e231f, type: 3}
-        m_Scale: {x: 44, y: 4}
+        m_Scale: {x: 4, y: 4}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: a1b3a78afb899ae4b92db57e7b9d123f, type: 3}
@@ -30,7 +30,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Falloff: 4.362394
+    - _Falloff: 1.2256327
     - _FalloffPlanet: 5
     - _Size: 0.1
     - _Transparency: 15
@@ -38,11 +38,11 @@ Material:
     m_Colors:
     - _AtmoColor: {r: 0.5, g: 0.5, b: 1, a: 1}
     - _AtmosphereColor: {r: 0.5, g: 0.5, b: 1, a: 1}
-    - _Color: {r: 0.13121146, g: 0.07757538, b: 0.1590525, a: 1}
-    - _Color1: {r: 0.39727074, g: 0.6699, b: 0.6200576, a: 1}
-    - _Color2: {r: 0.03325093, g: 0.0268058, b: 0.024402028, a: 1}
-    - _Color3: {r: 0.34193033, g: 0.35443094, b: 0.3539882, a: 1}
-    - _RimColor: {r: 0.7242071, g: 0.66126925, b: 0.86739266, a: 1}
+    - _Color: {r: 0.5984486, g: 0.58561003, b: 0.48536924, a: 1}
+    - _Color1: {r: 0.32007015, g: 0.9897369, b: 0.22375, a: 1}
+    - _Color2: {r: 0.51726276, g: 0.5139553, b: 0.5457775, a: 1}
+    - _Color3: {r: 0.41506857, g: 0.15883943, b: 0.2561745, a: 1}
+    - _RimColor: {r: 0.013470965, g: 0.09777759, b: 0.20435289, a: 1}
     - _TintColor: {r: 0.5, g: 0.5, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!1002 &2100001
