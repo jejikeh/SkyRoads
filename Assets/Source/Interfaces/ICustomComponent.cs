@@ -1,4 +1,6 @@
-﻿namespace Source.Interfaces
+﻿using Source.Core;
+
+namespace Source.Interfaces
 {
     public interface  ICustomComponent
     {

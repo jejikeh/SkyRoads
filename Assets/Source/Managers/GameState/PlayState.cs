@@ -1,25 +1,60 @@
-﻿using System.Threading.Tasks;
+﻿using Source.Managers.Audio;
+using Source.Managers.BoostSpeedMultiplier;
 using Source.UI;
+using Source.UI.DeadScreen;
 using Source.UI.GameScreen;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Source.Managers.GameState
 {
     public class PlayState : State
     {
-        public override void Set()
+        private readonly WindowManager _windowManager;
+        private readonly BoostSpeedMultiplierManager _boostSpeedMultiplier;
+
+        public PlayState(WindowManager windowManager, BoostSpeedMultiplierManager boostSpeedMultiplier)
         {
-            SceneManager.LoadScene("Component");
-            GameManager.ScoreManager.Enable();
-            GameManager.BoostSpeedMultiplierManager.Init();
-            WindowManager.Open<GameScreen>(null);
+            _windowManager = windowManager;
+            _boostSpeedMultiplier = boostSpeedMultiplier;
+            _pause = false;
         }
 
-        public override void Unset()
+        private string _playerTrack;
+        private bool _pause;
+        
+        public override async void Set()
         {
-            GameManager.ScoreManager.Disable();
-            GameManager.BoostSpeedMultiplierManager.Reset();
-            WindowManager.Close<GameScreen>();
+            SceneManager.LoadScene("Component");
+            WindowManager.SaveToQuene<GameScreen>(null);
+            AudioManager.Instance.Play("Engine");
+
+            string[] tracks = { "equinox", "onthenigthway", "homeresonance" };
+            _playerTrack = tracks[Random.Range(0, tracks.Length - 1)];
+            AudioManager.Instance.Play(_playerTrack);
+        }
+
+        public override async void Unset()
+        {
+            AudioManager.Instance.Stop(_playerTrack);
+            await _windowManager.Close<GameScreen>();
+        }
+
+        public async void TogglePause(WindowManager windowManager)
+        {
+            if (!_pause)
+            {
+                AudioManager.Instance.Stop("Engine");
+                _boostSpeedMultiplier.Reset();
+                await windowManager.Open<PauseScreen>(null);
+            }
+            else
+            {
+                AudioManager.Instance.Play("Engine");
+                _boostSpeedMultiplier.Init();
+                await windowManager.Close<PauseScreen>();
+            }
+            _pause = !_pause;
         }
     }
 }

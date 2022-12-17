@@ -4,6 +4,7 @@ using Source.Core;
 using Source.EntityComponents;
 using Source.EntityComponents.RandomPlanetMaterial;
 using Source.EntityComponents.SmoothTransformRotate;
+using Source.Managers.BoostSpeedMultiplier;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -20,7 +21,7 @@ namespace Source.Entities.RandomPlanet
         {
             var randomDirection = new Vector3(Random.Range(0.1f, 1f), Random.Range(0.1f, 1f), Random.Range(0.1f, 1f));
             transform.localRotation = Quaternion.Euler(randomDirection * 100);
-            AddCustomComponent(new SmoothTransformRotateComponent(_smoothTransformRotateConfig)).RotateBeyond360(randomDirection);
+            AddCustomComponent(new SmoothTransformRotateComponent(_smoothTransformRotateConfig, GameManager.GetCustomComponent<BoostSpeedMultiplierManager>())).RotateBeyond360(randomDirection);
             AddCustomComponent(new RandomPlanetMaterialComponent(_randomPlanetMaterialComponentConfig));
 
             var randomScale = Random.Range(_randomMinSize, _randomMaxSize);

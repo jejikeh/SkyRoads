@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Source.Core;
-using Source.Managers;
+using Source.Managers.BoostSpeedMultiplier;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,14 +10,15 @@ namespace Source.Entities.ObjectSpawner
     {
         [SerializeField] private Vector2 _maxSize;
         [SerializeField] private Vector2 _minSize;
-        private float _currentTime = 0f;
-        private float _randomObjectRespawnTime = 0f;
         [SerializeField] private float _maxSpawnTimer;
-        [SerializeField] private GameObject _objectPrefab;
+        [SerializeField] private List<GameObject> _objectPrefab;
+        private float _randomObjectRespawnTime;
+        private float _currentTime;
 
         private void Spawn()
         {
-            Instantiate(_objectPrefab, GetRandomVector3(), Quaternion.identity);
+            var spawnGameObject = _objectPrefab[Random.Range(0, _objectPrefab.Count)];
+            Instantiate(spawnGameObject, GetRandomVector3(), Quaternion.identity);
         }
 
         private void Start()
@@ -32,7 +33,7 @@ namespace Source.Entities.ObjectSpawner
             {
                 Spawn();
                 _currentTime = 0;
-                _randomObjectRespawnTime = Random.Range(0, _maxSpawnTimer / GameManager.BoostSpeedMultiplierManager.BoostSpeedMultiplier);
+                _randomObjectRespawnTime = Random.Range(0, _maxSpawnTimer / GameManager.GetCustomComponent<BoostSpeedMultiplierManager>().BoostSpeedMultiplier);
             }
 
         }

@@ -1,8 +1,7 @@
 ﻿using Source.Core;
-using Source.EntityComponents;
 using Source.EntityComponents.ClampPosition;
 using Source.EntityComponents.MoveByLeftRightDirection;
-using Source.Managers;
+using Source.Managers.BoostSpeedMultiplier;
 using UnityEngine;
 
 namespace Source.Entities.Ship
@@ -16,12 +15,13 @@ namespace Source.Entities.Ship
         private void Start()
         {
             AddCustomComponent(new ClampPositionComponent(_clampPositionConfig));
-            _moveByLeftRightDirectionComponent = AddCustomComponent(new MoveByLeftRightDirectionComponent(_moveByLeftRightDirectionConfig));
+            _moveByLeftRightDirectionComponent = AddCustomComponent(
+                new MoveByLeftRightDirectionComponent(_moveByLeftRightDirectionConfig, GameManager.GetCustomComponent<BoostSpeedMultiplierManager>()));
         }
         
         private void FixedUpdate()
         {
-            _moveByLeftRightDirectionComponent.Turn(GameManager.Input.Player.Move.ReadValue<Vector2>());
+            _moveByLeftRightDirectionComponent.Turn(GameManager.PlayerInputUserManager.Input.Player.Move.ReadValue<Vector2>() * GlobalEntityTimeScale);
             UpdateComponents();
         }
     }

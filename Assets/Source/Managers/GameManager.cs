@@ -1,62 +1,61 @@
-﻿using Source.Managers.BoostSpeedMultiplier;
+﻿using System.Threading.Tasks;
+using Source.Core;
+using Source.Managers.Audio;
+using Source.Managers.BoostSpeedMultiplier;
 using Source.Managers.GameState;
 using Source.Managers.Score;
 using Source.UI;
 using Source.UI.DeadScreen;
-using Source.UI.GameScreen;
-using Source.UI.MenuScreen;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Source.Managers
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : Entity
     {
+        [Header("Component Configs")]
         [SerializeField] private BoostSpeedMultiplierManagerConfig _boostSpeedMultiplierManagerConfig;
         [SerializeField] private ScoreManagerConfig _scoreManagerConfig;
         [SerializeField] private GameStateManagerConfig _gameStateManagerConfig;
-        
-        public static PlayerInput Input;
-        public static ScoreManager ScoreManager;
-        public static BoostSpeedMultiplierManager BoostSpeedMultiplierManager;
-        public static GameStateManager GameStateManager;
 
-        protected void Awake()
+        [Header("Manager References")] 
+        public PlayerInputUserManager PlayerInputUserManager;
+        public WindowManager WindowManager;
+
+        private void Awake()
         {
-            Input ??= GetComponent<PlayerInputUserManager>().Init().Input;
-            Input.Enable();
+            PlayerInputUserManager.Init();
+            AddCustomComponent(new BoostSpeedMultiplierManager(_boostSpeedMultiplierManagerConfig, PlayerInputUserManager));
+            AddCustomComponent(new ScoreManager(_scoreManagerConfig, GetCustomComponent<BoostSpeedMultiplierManager>()));
+        }
+
+        private void Start()
+        {
+            AddCustomComponent(new GameStateManager(_gameStateManagerConfig, this));
+            PlayerInputUserManager.Input.Player.Pause.performed += SetPause;
+        }
+
+        private async void SetPause(InputAction.CallbackContext context)
+        {
+            if (GetCustomComponent<GameStateManager>().CurrentStateObject != GameStateManager.GameState.Play) return;
             
-            BoostSpeedMultiplierManager ??= new BoostSpeedMultiplierManager(_boostSpeedMultiplierManagerConfig);
-            ScoreManager ??= new ScoreManager(_scoreManagerConfig);
-            GameStateManager ??= new GameStateManager(_gameStateManagerConfig);
-            
-            // if do not reload scene its no need
-            if (GameStateManager.CurrentState is MenuState) return;
-            ScoreManager.Enable();
-            BoostSpeedMultiplierManager.Init();
+            if (Time.timeScale == 1f)
+            {
+                Time.timeScale = 0f;
+                await WindowManager.Open<PauseScreen>(null);
+                AudioManager.Instance.SetMute(true);
+            }
+            else
+            {
+                Time.timeScale = 1f;
+                await WindowManager.Close<PauseScreen>();
+                AudioManager.Instance.SetMute(false);
+            }
         }
         
         private void Update()
         {
-            if(ScoreManager.Enabled)
-                ScoreManager.Update(1f);
-            
-            BoostSpeedMultiplierManager.Update(1f);
-        }
-
-        private void OnDestroy()
-        {
-            BoostSpeedMultiplierManager.Destroy();
-            ScoreManager.Destroy();
-        }
-
-        private void OnEnable()
-        {
-            Input?.Enable();
-        }
-
-        private void OnDisable()
-        {
-            Input?.Disable();
+            UpdateComponents();
         }
     }
 }

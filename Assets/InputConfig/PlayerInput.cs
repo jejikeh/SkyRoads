@@ -71,6 +71,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Hold(duration=0.2)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""fc4e2348-26a2-494e-a61a-d9eef4703ef2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -337,6 +346,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""StopSpeedMode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""24253969-0d1f-4c04-b17c-0ef3bf5a7795"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -378,6 +398,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player_BoostSpeedMode = m_Player.FindAction("BoostSpeedMode", throwIfNotFound: true);
         m_Player_DefaultSpeedMode = m_Player.FindAction("DefaultSpeedMode", throwIfNotFound: true);
         m_Player_StopSpeedMode = m_Player.FindAction("StopSpeedMode", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -442,6 +463,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_BoostSpeedMode;
     private readonly InputAction m_Player_DefaultSpeedMode;
     private readonly InputAction m_Player_StopSpeedMode;
+    private readonly InputAction m_Player_Pause;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -451,6 +473,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @BoostSpeedMode => m_Wrapper.m_Player_BoostSpeedMode;
         public InputAction @DefaultSpeedMode => m_Wrapper.m_Player_DefaultSpeedMode;
         public InputAction @StopSpeedMode => m_Wrapper.m_Player_StopSpeedMode;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -475,6 +498,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @StopSpeedMode.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStopSpeedMode;
                 @StopSpeedMode.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStopSpeedMode;
                 @StopSpeedMode.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStopSpeedMode;
+                @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -494,6 +520,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @StopSpeedMode.started += instance.OnStopSpeedMode;
                 @StopSpeedMode.performed += instance.OnStopSpeedMode;
                 @StopSpeedMode.canceled += instance.OnStopSpeedMode;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -523,5 +552,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnBoostSpeedMode(InputAction.CallbackContext context);
         void OnDefaultSpeedMode(InputAction.CallbackContext context);
         void OnStopSpeedMode(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

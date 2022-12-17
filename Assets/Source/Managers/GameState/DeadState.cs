@@ -1,5 +1,8 @@
 ﻿using System;
-using System.Threading.Tasks;
+using Source.Core;
+using Source.Managers.Audio;
+using Source.Managers.BoostSpeedMultiplier;
+using Source.Managers.Score;
 using Source.UI;
 using Source.UI.DeadScreen;
 
@@ -7,21 +10,34 @@ namespace Source.Managers.GameState
 {
     public class DeadState : State
     {
-        public override void Set()
+        private WindowManager _windowManager;
+        private ScoreManager _scoreManager;
+        private BoostSpeedMultiplierManager _boostSpeedMultiplierManager;
+
+        public DeadState(WindowManager windowManager, ScoreManager scoreManager, BoostSpeedMultiplierManager boostSpeedMultiplierManager)
         {
-            WindowManager.Open<DeadScreen>(new DeadScreen.DeadScreenData(GameManager.ScoreManager.Score, Math.Abs(GameManager.ScoreManager.Score - GameManager.ScoreManager.GetRecord) < 0.001));
-            GameManager.BoostSpeedMultiplierManager.Reset();
-            GameManager.ScoreManager.Reset();
-            GameManager.ScoreManager.Disable();
-            GameManager.Input.Player.Move.Disable();
+            _windowManager = windowManager;
+            _scoreManager = scoreManager;
+            _boostSpeedMultiplierManager = boostSpeedMultiplierManager;
+        }
+        
+        public override async void Set()
+        {
+            _boostSpeedMultiplierManager.Reset();
+            
+            AudioManager.Instance.Stop("Engine");
+            AudioManager.Instance.Play("exp_1");
+            
+            if(Math.Abs(_scoreManager.Score - _scoreManager.HighestScore) < 0.001)
+                AudioManager.Instance.Play("NewHighScore");
+            
+            await _windowManager.Open<DeadScreen>(new DeadScreen.DeadScreenData(_scoreManager.Score, Math.Abs(_scoreManager.Score - _scoreManager.HighestScore) < 0.001));
         }
 
-        public override void Unset()
+        public override async void Unset()
         {
-            GameManager.ScoreManager.Enable();
-            GameManager.Input.Player.Move.Enable();
-            GameManager.BoostSpeedMultiplierManager.Init();
-            WindowManager.Close<DeadScreen>();
+            _scoreManager.Reset();
+            await _windowManager.Close<DeadScreen>();
         }
     }
 }

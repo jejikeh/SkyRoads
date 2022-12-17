@@ -29,6 +29,16 @@ namespace Source.Core
             return component;
         }
         
+        public T TryAddCustomComponent<T>(T component) where T : class, ICustomComponent
+        {
+            var requiredComponent = _components.FirstOrDefault(x => component.GetType() == x.GetType());
+            if (requiredComponent is not null)
+                return requiredComponent as T;
+            
+            _components.Add(component);
+            return component;
+        }
+        
         /// <summary>
         /// Removes component by specific type
         /// </summary>

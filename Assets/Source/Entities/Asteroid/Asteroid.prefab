@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6215252475876950375}
   m_Layer: 0
   m_Name: Asteroid
-  m_TagString: Untagged
+  m_TagString: Asteroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61,6 +61,8 @@ MonoBehaviour:
     LimitMinYPosition: 1.5
     LimitMaxYPosition: 4
     Handler: {fileID: 7857694764860891664}
+  _minSize: 0.5
+  _maxSize: 1
 --- !u!65 &6548731931187834326
 BoxCollider:
   m_ObjectHideFlags: 0

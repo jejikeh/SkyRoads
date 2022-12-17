@@ -1,25 +1,37 @@
 using System.Threading.Tasks;
 using DG.Tweening;
-using Source.Managers;
+using Source.Managers.Audio;
 using Source.Managers.GameState;
-using TMPro;
 using UnityEngine;
 
 namespace Source.UI.MenuScreen
 {
     public class MenuScreen : Window
     {
-        protected override void OpenStart()
+        protected override async Task OpenStart()
         {
-            var desireSize = transform;
-            var size = desireSize.localScale;
-            desireSize.localScale = Vector3.zero;
-            transform.DOScale(size, 1f);
+            var desirePosition = transform;
+            var size = desirePosition.position;
+            desirePosition.position = Vector3.zero;
+            var tweener = transform.DOMove(size, 1f).SetEase(Ease.OutSine);
+
+            await tweener.AsyncWaitForCompletion();
+        }
+
+        public void TogleSound()
+        {
+            AudioManager.Instance.TogleAudioVolume();
         }
 
         public void Play()
+        { 
+           GameManager.GetCustomComponent<GameStateManager>().SetGameState(GameStateManager.GameState.Play);
+           AudioManager.Instance.Play("Click_02");
+        }
+        
+        public void OpenRecord()
         {
-            GameManager.GameStateManager.SetGameState<PlayState>();
+            GameManager.GetCustomComponent<GameStateManager>().SetGameState(GameStateManager.GameState.Records);
         }
     }
 }

@@ -1,25 +1,26 @@
 ﻿using System.Threading.Tasks;
 using JetBrains.Annotations;
+using Source.Core;
 using UnityEngine;
 
 namespace Source.UI
 {
-    public class Window : MonoBehaviour
+    public class Window : Entity
     {
         [CanBeNull] protected object Data;
-
-        public void OnOpenStart([CanBeNull] object data)
+        
+        public async Task OnOpenStart([CanBeNull] object data)
         {
             Data = data;
-            OpenStart();
+            await OpenStart();
         }
 
         public async Task OnCloseStart()
         {
-            CloseStart();
+            await CloseStart();
         }
         
-        protected virtual void OpenStart() { }
-        protected virtual void CloseStart() { }
+        protected virtual async Task OpenStart() { }
+        protected virtual async Task CloseStart() { }
     }
 }

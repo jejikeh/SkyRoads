@@ -2,6 +2,7 @@
 using Source.EntityComponents;
 using Source.EntityComponents.MaterialUVOffset;
 using Source.Managers;
+using Source.Managers.BoostSpeedMultiplier;
 using UnityEngine;
 
 namespace Source.Entities.FakeMovingRoad
@@ -10,7 +11,7 @@ namespace Source.Entities.FakeMovingRoad
     {
         [SerializeField] private Material _roadMaterial;
         
-        private void Awake()
+        private void Start()
         {
             var materialUVOffsetConfig = new MaterialUVOffsetEntityComponentConfig
             {
@@ -26,7 +27,7 @@ namespace Source.Entities.FakeMovingRoad
 
         private void Update()
         {
-            UpdateComponents(GameManager.BoostSpeedMultiplierManager.BoostSpeedMultiplier);
+            UpdateComponents(GameManager.GetCustomComponent<BoostSpeedMultiplierManager>().BoostSpeedMultiplier);
         }
     }
 }

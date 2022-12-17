@@ -1,4 +1,6 @@
 ﻿using System.Threading.Tasks;
+using Source.Managers.Audio;
+using Source.Managers.Score;
 using Source.UI;
 using Source.UI.MenuScreen;
 using UnityEngine.SceneManagement;
@@ -7,22 +9,31 @@ namespace Source.Managers.GameState
 {
     public class MenuState : State
     {
-        public override void Set()
+        private WindowManager _windowManager;
+        public MenuState(WindowManager windowManager)
         {
-            SceneManager.LoadScene("MainMenu");
-            WindowManager.Open<MenuScreen>(null);
-            GameManager.BoostSpeedMultiplierManager.Reset();
-            GameManager.ScoreManager.Reset();
-            GameManager.ScoreManager.Disable();
-            GameManager.Input.Player.Move.Disable();
+            _windowManager = windowManager;
+        }
+        public override async void Set()
+        {
+            if (SceneManager.GetActiveScene().name == "MainMenu")
+            {
+                await _windowManager.Open<MenuScreen>(null);
+            }
+            else
+            {
+                SceneManager.LoadScene("MainMenu");
+                WindowManager.SaveToQuene<MenuScreen>(null);
+            }
+            
+            AudioManager.Instance.Play("sunaraw");
+
         }
 
-        public override void Unset()
+        public override async void Unset()
         {
-            GameManager.ScoreManager.Enable();
-            GameManager.Input.Player.Move.Enable();
-            GameManager.BoostSpeedMultiplierManager.Init();
-            WindowManager.Close<MenuScreen>();
+            AudioManager.Instance.Stop("sunaraw");
+            await _windowManager.Close<MenuScreen>();
         }
     }
 }

@@ -1,47 +1,63 @@
 using System;
 using Source.Core;
+using Source.Managers.BoostSpeedMultiplier;
+using Source.Managers.Score;
+using UnityEngine;
 
 namespace Source.Managers.GameState
 {
     public class GameStateManager : EntityComponent<GameStateManagerConfig>
     {
-        private State _state;
+        public static GameState CurrentState;
+        private static State _state;
+        private GameManager _gameManager;
 
-        public State CurrentState => _state;
+        public GameState CurrentStateObject => CurrentState;
         
         public enum GameState
         {
             Play,
             Dead,
-            Menu
+            Menu,
+            Records
         }
 
-        public void SetGameState<T>() where T : State, new()
+        public GameStateManager(GameStateManagerConfig componentConfig, GameManager gameManager) : base(componentConfig)
         {
-            if (_state.GetType() == typeof(T)) return;
-            _state.Unset();
-            _state = new T();
-            _state.Set();
+            _gameManager = gameManager;
+            SetGameState(ComponentConfig.StateOnStartup);
         }
-        
-        public GameStateManager(GameStateManagerConfig componentConfig) : base(componentConfig) { 
-            switch (ComponentConfig.StateOnStartup)
+
+        public void SetGameState(GameState state)
+        {
+            if(state == CurrentState) return;
+            _state?.Unset();
+            switch (state)
             {
                 case GameState.Play:
-                    _state = new PlayState();
+                    _state = new PlayState(_gameManager.WindowManager, _gameManager.GetCustomComponent<BoostSpeedMultiplierManager>());
                     _state.Set();
                     break;
                 case GameState.Dead:
-                    _state = new DeadState();
+                    _state = new DeadState(
+                        _gameManager.WindowManager, 
+                        _gameManager.GetCustomComponent<ScoreManager>(),
+                        _gameManager.GetCustomComponent<BoostSpeedMultiplierManager>());
                     _state.Set();
                     break;
                 case GameState.Menu:
-                    _state = new MenuState();
+                    _state = new MenuState(_gameManager.WindowManager);
+                    _state.Set();
+                    break;
+                case GameState.Records:
+                    _state = new RecordState(_gameManager.WindowManager);
                     _state.Set();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
+            CurrentState = state;
         }
         
         public override void Update(float timeScale) { }

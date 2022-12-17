@@ -6,10 +6,10 @@ namespace Source.Managers
     {
         public PlayerInput Input { get; private set; }
 
-        public PlayerInputUserManager Init()
+        public void Init()
         {
             Input = new PlayerInput();
-            return this;
+            Input.Enable();
         }
 
         public void OnEnable()

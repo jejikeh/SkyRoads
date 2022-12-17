@@ -1,5 +1,7 @@
 using Source.Core;
 using Source.Managers;
+using Source.Managers.Audio;
+using Source.Managers.Score;
 using UnityEngine;
 
 namespace Source.Entities.DeleteArea
@@ -8,9 +10,12 @@ namespace Source.Entities.DeleteArea
     {
         private void OnTriggerEnter(Collider other)
         {
-            GameManager.ScoreManager.Bonus();
-            var o = other.gameObject;
-            Destroy(o);
+            if (!other.CompareTag("Asteroid")) return;
+            AudioManager.Instance.Play("asteroid");
+            GameManager.GetCustomComponent<ScoreManager>().Bonus();
+            var otherGameObject = other.gameObject;
+            Destroy(otherGameObject);
+
         }
     }
 }

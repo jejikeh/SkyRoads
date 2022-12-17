@@ -1,5 +1,7 @@
+using System.Threading.Tasks;
 using DG.Tweening;
 using Source.Managers;
+using Source.Managers.Score;
 using TMPro;
 using UnityEngine;
 
@@ -10,18 +12,19 @@ namespace Source.UI.GameScreen
         [SerializeField] private TMP_Text _scoreText;
         [SerializeField] private TMP_Text _highestScoreText;
         
-        protected override void OpenStart()
+        protected override async Task OpenStart()
         {
-            var desireSize = transform;
-            var size = desireSize.localScale;
-            desireSize.localScale = Vector3.zero;
-            transform.DOScale(size, 1f);
+            var desirePosition = transform;
+            var size = desirePosition.position;
+            desirePosition.position = Vector3.zero;
+            var tweener = transform.DOMove(size, 1f).SetEase(Ease.OutSine);
+            await tweener.AsyncWaitForCompletion();
         }
 
         public void Update()
         {
-            _highestScoreText.text = $"Highest Score: {GameManager.ScoreManager.GetRecord}";
-            _scoreText.text = $"Score: {GameManager.ScoreManager.Score}";
+            _highestScoreText.text = $"Highest Score: {(int)GameManager.GetCustomComponent<ScoreManager>().HighestScore}";
+            _scoreText.text = $"Score: {(int)GameManager.GetCustomComponent<ScoreManager>().Score}";
         }
     }
 }
