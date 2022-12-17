@@ -7,7 +7,7 @@ namespace Source.Core.CustomException
     {
         private const string ExceptionMessage = "The entity does not have the required component";
         public EntityDoesntHaveRequiredComponent() { }
-        public EntityDoesntHaveRequiredComponent(string message = "") : base($"{ExceptionMessage} {typeof(T).FullName}") { }
-        public EntityDoesntHaveRequiredComponent(Exception inner, string message = "") : base($"{ExceptionMessage} {typeof(T).FullName}", inner) { }
+        public EntityDoesntHaveRequiredComponent(string message) : base($"{message} {ExceptionMessage} {typeof(T).FullName}") { }
+        public EntityDoesntHaveRequiredComponent(Exception inner, string message = "") : base($"{message} {ExceptionMessage} {typeof(T).FullName}", inner) { }
     }
 }

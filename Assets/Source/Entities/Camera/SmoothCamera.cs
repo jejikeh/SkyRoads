@@ -2,6 +2,7 @@
 using Source.EntityComponents.CameraSpeedFovChanger;
 using Source.EntityComponents.SmoothFollowTarget;
 using Source.EntityComponents.SmoothTransformRotate;
+using Source.Managers;
 using Source.Managers.BoostSpeedMultiplier;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,24 +11,23 @@ namespace Source.Entities.Camera
 {
     public class SmoothCamera : Entity
     {
+        [SerializeField] private BoostSpeedMultiplierManager _boostSpeedMultiplierManager;
         [SerializeField] private CameraSpeedEffectsChangerComponentConfig _cameraEffectsChangerComponentConfig;
         [SerializeField] private SmoothFollowTargetComponentConfig _smoothFollowTargetConfig;
-
         [SerializeField]
         private SmoothTransformRotateConfig _smoothTransformRotateConfig;
         
         private void Start()
         {
-            var boostSpeedMultiplierManager = GameManager.GetCustomComponent<BoostSpeedMultiplierManager>();
-            AddCustomComponent(new SmoothFollowTargetComponent(_smoothFollowTargetConfig, boostSpeedMultiplierManager));
-            AddCustomComponent(new SmoothTransformRotateComponent(_smoothTransformRotateConfig, boostSpeedMultiplierManager));
-            AddCustomComponent(new CameraSpeedEffectsChangerComponent(_cameraEffectsChangerComponentConfig, boostSpeedMultiplierManager));
+            AddCustomComponent(new SmoothFollowTargetComponent(_smoothFollowTargetConfig, _boostSpeedMultiplierManager));
+            AddCustomComponent(new SmoothTransformRotateComponent(_smoothTransformRotateConfig, _boostSpeedMultiplierManager));
+            AddCustomComponent(new CameraSpeedEffectsChangerComponent(_cameraEffectsChangerComponentConfig, _boostSpeedMultiplierManager));
 
-            GameManager.PlayerInputUserManager.Input.Player.DefaultSpeedMode.performed += Default;
-            GameManager.PlayerInputUserManager.Input.Player.BoostSpeedMode.performed += Boost;
-            GameManager.PlayerInputUserManager.Input.Player.StopSpeedMode.performed += Stop;
-            GameManager.PlayerInputUserManager.Input.Player.Move.performed += RotateOnPerformMoveAction;
-            GameManager.PlayerInputUserManager.Input.Player.Move.canceled += RotateOnPerformMoveAction;
+            PlayerInputUserManager.Instance.Input.DefaultSpeedMode.performed += Default;
+            PlayerInputUserManager.Instance.Input.BoostSpeedMode.performed += Boost;
+            PlayerInputUserManager.Instance.Input.StopSpeedMode.performed += Stop;
+            PlayerInputUserManager.Instance.Input.Move.performed += RotateOnPerformMoveAction;
+            PlayerInputUserManager.Instance.Input.Move.canceled += RotateOnPerformMoveAction;
         }
 
         private void Boost(InputAction.CallbackContext context)
@@ -52,11 +52,11 @@ namespace Source.Entities.Camera
 
         protected override void OnDestroy()
         {
-            GameManager.PlayerInputUserManager.Input.Player.BoostSpeedMode.performed -= Boost;
-            GameManager.PlayerInputUserManager.Input.Player.DefaultSpeedMode.performed -= Default;
-            GameManager.PlayerInputUserManager.Input.Player.StopSpeedMode.performed -= Stop;
-            GameManager.PlayerInputUserManager.Input.Player.Move.performed -= RotateOnPerformMoveAction;
-            GameManager.PlayerInputUserManager.Input.Player.Move.canceled -= RotateOnPerformMoveAction;
+            PlayerInputUserManager.Instance.Input.DefaultSpeedMode.performed -= Default;
+            PlayerInputUserManager.Instance.Input.BoostSpeedMode.performed -= Boost;
+            PlayerInputUserManager.Instance.Input.StopSpeedMode.performed -= Stop;
+            PlayerInputUserManager.Instance.Input.Move.performed -= RotateOnPerformMoveAction;
+            PlayerInputUserManager.Instance.Input.Move.canceled -= RotateOnPerformMoveAction;
             
             base.OnDestroy();
         }

@@ -1,6 +1,4 @@
-using System;
 using Source.Interfaces;
-using Source.Managers;
 using UnityEngine;
 
 namespace Source.Core
@@ -10,14 +8,7 @@ namespace Source.Core
         private static float _entityTimeScale = 1f;
         public float GlobalEntityTimeScale => _entityTimeScale;
         private readonly ComponentHandler _componentHandler = new ComponentHandler();
-        protected GameManager GameManager;
-
-        private void Awake()
-        {
-            var gameManager = FindObjectOfType<GameManager>();
-            GameManager = gameManager ? gameManager : throw new NullReferenceException("GameManager is not found");
-        }
-
+        
         public T AddCustomComponent<T>(T component) where T : ICustomComponent
         {
             return _componentHandler.AddCustomComponent(component);
@@ -38,7 +29,7 @@ namespace Source.Core
             return _componentHandler.TryGetCustomComponent<T>();
         }
         
-        public void UpdateComponents(float timeScale = 1f)
+        protected void UpdateComponents(float timeScale)
         {
             _componentHandler.UpdateComponents(timeScale);
         }

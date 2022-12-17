@@ -1,6 +1,5 @@
 ﻿using DG.Tweening;
 using Source.Core;
-using Source.Managers;
 using Source.Managers.BoostSpeedMultiplier;
 using UnityEngine;
 
@@ -8,7 +7,7 @@ namespace Source.EntityComponents.SmoothTransformRotate
 {
     public class SmoothTransformRotateComponent : EntityComponent<SmoothTransformRotateConfig>
     {
-        private BoostSpeedMultiplierManager _boostSpeedMultiplierManager;
+        private readonly BoostSpeedMultiplierManager _boostSpeedMultiplierManager;
 
         public SmoothTransformRotateComponent(SmoothTransformRotateConfig config,
             BoostSpeedMultiplierManager boostSpeedMultiplierManager) : base(config)
@@ -19,9 +18,9 @@ namespace Source.EntityComponents.SmoothTransformRotate
         public void Rotate(Vector3 direction)
         {
             var rotatedVector = new Vector3(
-                (-direction.y * ComponentConfig.RotateAngle / 2) / _boostSpeedMultiplierManager.BoostSpeedMultiplier,
+                (-direction.y * ComponentConfig.RotateAngle / 2) * _boostSpeedMultiplierManager.RotateMultiplier,
                 0,
-                -direction.x * ComponentConfig.RotateAngle / _boostSpeedMultiplierManager.BoostSpeedMultiplier);
+                -direction.x * ComponentConfig.RotateAngle * _boostSpeedMultiplierManager.RotateMultiplier);
             ComponentConfig.RotatedTransform.DOLocalRotate(rotatedVector, ComponentConfig.RotateTime);
         }
         

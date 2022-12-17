@@ -23,7 +23,7 @@ namespace Source.Core
         {
             var requiredComponent = _components.FirstOrDefault(x => component.GetType() == x.GetType());
             if (requiredComponent is not null)
-                throw new EntityAlreadyHasComponentOfThisClass(component.GetType());
+                throw new EntityAlreadyHasComponentOfThisClass();
             
             _components.Add(component);
             return component;

@@ -20,7 +20,13 @@ namespace Source.UI
             await CloseStart();
         }
         
-        protected virtual async Task OpenStart() { }
-        protected virtual async Task CloseStart() { }
+        protected virtual Task OpenStart() { return  Task.CompletedTask; }
+        protected virtual Task CloseStart() { return Task.CompletedTask; }
+
+        [CanBeNull]
+        public virtual GameObject GetFirstSelectedButton()
+        {
+            return null;
+        }
     }
 }

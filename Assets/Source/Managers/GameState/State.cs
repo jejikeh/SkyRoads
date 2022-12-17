@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace Source.Managers.GameState
+﻿namespace Source.Managers.GameState
 {
     public abstract class State
     {

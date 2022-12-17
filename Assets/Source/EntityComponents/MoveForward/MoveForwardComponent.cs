@@ -1,5 +1,4 @@
 ﻿using Source.Core;
-using Source.Managers;
 using Source.Managers.BoostSpeedMultiplier;
 using UnityEngine;
 
@@ -17,7 +16,7 @@ namespace Source.EntityComponents.MoveForward
         
         public override void Update(float timeScale)
         {
-            ComponentConfig.Handler.Translate(ComponentConfig.MoveDirection * (ComponentConfig.MovingSpeed * _boostSpeedMultiplierManager.BoostSpeedMultiplier * Time.deltaTime));
+            ComponentConfig.Handler.Translate(ComponentConfig.MoveDirection * (ComponentConfig.MovingSpeed * _boostSpeedMultiplierManager.MoveMultiplier * Time.deltaTime));
         }
     }
 }

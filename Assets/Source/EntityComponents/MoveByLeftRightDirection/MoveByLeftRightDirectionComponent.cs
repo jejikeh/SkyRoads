@@ -1,5 +1,4 @@
 ﻿using Source.Core;
-using Source.Managers;
 using Source.Managers.BoostSpeedMultiplier;
 using UnityEngine;
 
@@ -16,7 +15,7 @@ namespace Source.EntityComponents.MoveByLeftRightDirection
 
         public void Turn(Vector3 direction)
         {
-            ComponentConfig.Handler.Translate(direction * (ComponentConfig.Speed / _boostSpeedMultiplierManager.BoostSpeedMultiplier * Time.deltaTime));
+            ComponentConfig.Handler.Translate(direction * (ComponentConfig.Speed * _boostSpeedMultiplierManager.TurnMultiplier * Time.deltaTime));
         }
         
         public override void Update(float timeScale) { }

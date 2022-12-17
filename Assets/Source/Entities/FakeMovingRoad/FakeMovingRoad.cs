@@ -1,7 +1,5 @@
 ﻿using Source.Core;
-using Source.EntityComponents;
 using Source.EntityComponents.MaterialUVOffset;
-using Source.Managers;
 using Source.Managers.BoostSpeedMultiplier;
 using UnityEngine;
 
@@ -9,6 +7,7 @@ namespace Source.Entities.FakeMovingRoad
 {
     public class FakeMovingRoad : Entity
     {
+        [SerializeField] private BoostSpeedMultiplierManager _boostSpeedMultiplierManager;
         [SerializeField] private Material _roadMaterial;
         
         private void Start()
@@ -27,7 +26,7 @@ namespace Source.Entities.FakeMovingRoad
 
         private void Update()
         {
-            UpdateComponents(GameManager.GetCustomComponent<BoostSpeedMultiplierManager>().BoostSpeedMultiplier);
+            UpdateComponents(_boostSpeedMultiplierManager.MoveMultiplier);
         }
     }
 }

@@ -8,7 +8,6 @@ namespace Source.EntityComponents.MoveForward
     {
         public float MovingSpeed;
         public Vector3 MoveDirection;
-
         public Transform Handler;
     }
 }

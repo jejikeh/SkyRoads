@@ -8,6 +8,7 @@ namespace Source.Entities.ObjectSpawner
 {
     public class Spawner : Entity
     {
+        [SerializeField] private BoostSpeedMultiplierManager _boostSpeedMultiplierManager;
         [SerializeField] private Vector2 _maxSize;
         [SerializeField] private Vector2 _minSize;
         [SerializeField] private float _maxSpawnTimer;
@@ -18,7 +19,7 @@ namespace Source.Entities.ObjectSpawner
         private void Spawn()
         {
             var spawnGameObject = _objectPrefab[Random.Range(0, _objectPrefab.Count)];
-            Instantiate(spawnGameObject, GetRandomVector3(), Quaternion.identity);
+             Instantiate(spawnGameObject, GetRandomVector3(), Quaternion.identity);
         }
 
         private void Start()
@@ -33,7 +34,7 @@ namespace Source.Entities.ObjectSpawner
             {
                 Spawn();
                 _currentTime = 0;
-                _randomObjectRespawnTime = Random.Range(0, _maxSpawnTimer / GameManager.GetCustomComponent<BoostSpeedMultiplierManager>().BoostSpeedMultiplier);
+                _randomObjectRespawnTime = Random.Range(0, _maxSpawnTimer / _boostSpeedMultiplierManager.MoveMultiplier);
             }
 
         }

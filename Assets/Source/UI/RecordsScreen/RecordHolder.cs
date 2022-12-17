@@ -1,4 +1,5 @@
-﻿using Source.Managers.Score;
+﻿using System.Globalization;
+using Source.Managers.Score;
 using UnityEngine;
 
 namespace Source.UI.RecordsScreen
@@ -11,7 +12,7 @@ namespace Source.UI.RecordsScreen
             for (var i = 0; i < ScoreStorage.SortedRecords.Count; i++)
             {
                 var recordUI = Instantiate(_recordUIItemPrefab, transform).GetComponent<RecordUIItem>();
-                recordUI.SetText((i + 1).ToString(), ScoreStorage.SortedRecords[i].Date.ToString(),  ScoreStorage.SortedRecords[i].Score.ToString());
+                recordUI.SetText((i + 1).ToString(), ScoreStorage.SortedRecords[i].Date.ToString(CultureInfo.InvariantCulture),  ScoreStorage.SortedRecords[i].Score.ToString(CultureInfo.InvariantCulture));
             }
         }
     }

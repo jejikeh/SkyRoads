@@ -245,7 +245,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 96b508eb878f7694c96ceee967ac206f, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 681ea8c1beb21854789ed3915c78367a, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: 96b508eb878f7694c96ceee967ac206f, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: c7e1bcfc6c3e7504aa2dda246009b2d4, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -400,7 +400,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 96b508eb878f7694c96ceee967ac206f, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 681ea8c1beb21854789ed3915c78367a, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: 96b508eb878f7694c96ceee967ac206f, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: c7e1bcfc6c3e7504aa2dda246009b2d4, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -613,7 +613,6 @@ GameObject:
   - component: {fileID: 4756260781375262588}
   - component: {fileID: 4756260781375262589}
   - component: {fileID: 4756260781375262590}
-  - component: {fileID: 6905680675568004414}
   m_Layer: 5
   m_Name: DeadScreen
   m_TagString: Untagged
@@ -690,18 +689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scoreText: {fileID: 4756260780997264723}
---- !u!114 &6905680675568004414
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4756260781375262593}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7ebdda5c8364c91b62fb01c3ee4bd12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _firstSelectedButton: {fileID: 2264608332655242247}
 --- !u!1 &4756260782161458717
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,4 @@
-﻿using System;
-using JetBrains.Annotations;
-using Source.Interfaces;
+﻿using Source.Interfaces;
 
 namespace Source.Core
 {

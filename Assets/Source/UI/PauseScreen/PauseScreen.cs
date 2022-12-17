@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Source.Managers;
 using UnityEngine;
 
-namespace Source.UI.DeadScreen
+namespace Source.UI.PauseScreen
 {
     [RequireComponent(typeof(PlayerInputUserManager))]
     public class PauseScreen : Window

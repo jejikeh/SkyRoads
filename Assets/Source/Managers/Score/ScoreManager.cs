@@ -1,32 +1,33 @@
-﻿using Source.Core;
-using Source.Managers.BoostSpeedMultiplier;
+﻿using Source.Managers.BoostSpeedMultiplier;
 using UnityEngine;
 
 namespace Source.Managers.Score
 {
-    public class ScoreManager : EntityComponent<ScoreManagerConfig>
+    public class ScoreManager : MonoBehaviour
     {
         public float Score { get; private set; }
         public float HighestScore { get; private set; }
-        private readonly BoostSpeedMultiplierManager _boostSpeedMultiplierManager;
 
-        public ScoreManager(ScoreManagerConfig componentConfig, BoostSpeedMultiplierManager boostSpeedMultiplierManager) : base(componentConfig)
+        [SerializeField] private BoostSpeedMultiplierManager _boostSpeedMultiplierManager;
+        [SerializeField] private float _scoreScale = 1f;
+        [SerializeField] private float _bonus = 10f;
+
+        private void Start()
         {
             Score = 0f;
             HighestScore = ScoreStorage.GetHighestScore();
-            _boostSpeedMultiplierManager = boostSpeedMultiplierManager;
         }
 
-        public override void Update(float timeScale)
+        private void Update()
         {
-            Score += _boostSpeedMultiplierManager.BoostSpeedMultiplier / ComponentConfig.ScoreScale * Time.deltaTime * timeScale;
+            Score += _boostSpeedMultiplierManager.ScoreMultiplier / _scoreScale * Time.deltaTime;
             if (Score > HighestScore)
                 HighestScore = Score;
         }
 
         public void Bonus()
         {
-            Score += ComponentConfig.Bonus * _boostSpeedMultiplierManager.BoostSpeedMultiplier;
+            Score += _bonus * _boostSpeedMultiplierManager.ScoreMultiplier;
         }
         
         public void Reset()

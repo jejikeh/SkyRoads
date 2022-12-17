@@ -1,25 +1,17 @@
-﻿using UnityEngine;
+﻿using Source.Core;
 
 namespace Source.Managers
 {
-    public class PlayerInputUserManager : MonoBehaviour
+    public class PlayerInputUserManager : Singleton<PlayerInputUserManager>
     {
-        public PlayerInput Input { get; private set; }
+        public PlayerInput.PlayerActions Input => _input.Player;
+        private PlayerInput _input;
 
-        public void Init()
+        protected override void Awake()
         {
-            Input = new PlayerInput();
-            Input.Enable();
-        }
-
-        public void OnEnable()
-        {
-            Input?.Enable();
-        }
-
-        public void OnDisable()
-        {
-            Input?.Disable();
+            base.Awake();
+            _input ??= new PlayerInput();
+            _input.Player.Enable();
         }
     }
 }

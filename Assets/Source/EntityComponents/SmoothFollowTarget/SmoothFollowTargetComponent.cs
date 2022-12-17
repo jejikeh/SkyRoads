@@ -1,5 +1,4 @@
 ﻿using Source.Core;
-using Source.Managers;
 using Source.Managers.BoostSpeedMultiplier;
 using UnityEngine;
 
@@ -8,7 +7,7 @@ namespace Source.EntityComponents.SmoothFollowTarget
     public class SmoothFollowTargetComponent : EntityComponent<SmoothFollowTargetComponentConfig>
     {
         private Vector3 _velocity = Vector3.zero;
-        private BoostSpeedMultiplierManager _boostSpeedMultiplierManager;
+        private readonly BoostSpeedMultiplierManager _boostSpeedMultiplierManager;
         
         public SmoothFollowTargetComponent(SmoothFollowTargetComponentConfig componentConfig,
             BoostSpeedMultiplierManager boostSpeedMultiplierManager) : base(componentConfig)
@@ -20,7 +19,7 @@ namespace Source.EntityComponents.SmoothFollowTarget
         {
             var desiredPosition = ComponentConfig.Target.position + ComponentConfig.Offset;
             if (ComponentConfig.AffectBySpeed)
-                desiredPosition -= Vector3.forward * _boostSpeedMultiplierManager.BoostSpeedMultiplier;
+                desiredPosition -= Vector3.forward * _boostSpeedMultiplierManager.MoveMultiplier;
             ComponentConfig.Handler.position = Vector3.SmoothDamp(ComponentConfig.Handler.position, desiredPosition, ref _velocity, ComponentConfig.SmoothTime * Time.deltaTime);
         }
     }

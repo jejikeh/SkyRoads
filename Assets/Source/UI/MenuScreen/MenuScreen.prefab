@@ -266,7 +266,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 96b508eb878f7694c96ceee967ac206f, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 681ea8c1beb21854789ed3915c78367a, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: 96b508eb878f7694c96ceee967ac206f, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: c7e1bcfc6c3e7504aa2dda246009b2d4, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -431,6 +431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03673c7682870dd4aadb58caeee52280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _firstSelectedButton: {fileID: 4673533982136001837}
 --- !u!1 &5478705465453579311
 GameObject:
   m_ObjectHideFlags: 0
@@ -676,7 +677,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 96b508eb878f7694c96ceee967ac206f, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 681ea8c1beb21854789ed3915c78367a, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: 96b508eb878f7694c96ceee967ac206f, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: c7e1bcfc6c3e7504aa2dda246009b2d4, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -947,6 +948,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6259834490319679720, guid: 20dc3fce6fc95984c90a9705d4e35473, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6259834490319679720, guid: 20dc3fce6fc95984c90a9705d4e35473, type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 96b508eb878f7694c96ceee967ac206f, type: 3}
     - target: {fileID: 6259834490319679720, guid: 20dc3fce6fc95984c90a9705d4e35473, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1

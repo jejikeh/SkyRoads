@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using Source.Core;
@@ -20,8 +19,10 @@ namespace Source.Managers.Audio
         {
             foreach (var audioSource in _audioGameSources)
             {
-                audioSource.mute = !audioSource.mute;
-                _isForceMute = audioSource.mute;
+                var mute = audioSource.mute;
+                mute = !mute;
+                audioSource.mute = mute;
+                _isForceMute = mute;
             }
             foreach (var audioSource in _audioMusicSources)
                 audioSource.mute = !audioSource.mute;

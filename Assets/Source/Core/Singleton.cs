@@ -1,5 +1,4 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Source.Core
 {
@@ -18,7 +17,7 @@ namespace Source.Core
             }
         }
 
-        private void Awake()
+        protected virtual void Awake()
         {
             if (_instance is null)
             {

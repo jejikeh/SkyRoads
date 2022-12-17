@@ -1,6 +1,5 @@
 ﻿using System;
 using Source.Interfaces;
-using Source.Managers.BoostSpeedMultiplier;
 using UnityEngine;
 
 namespace Source.EntityComponents.BoxColliderSizeChanger

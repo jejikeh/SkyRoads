@@ -3,13 +3,22 @@ using DG.Tweening;
 using Source.Managers.Audio;
 using Source.Managers.GameState;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Source.UI.MenuScreen
 {
     public class MenuScreen : Window
     {
+        [SerializeField] private GameObject _firstSelectedButton;
+        
+        public override GameObject GetFirstSelectedButton()
+        {
+            return _firstSelectedButton;
+        }
+        
         protected override async Task OpenStart()
         {
+            _firstSelectedButton.GetComponent<Button>().Select();
             var desirePosition = transform;
             var size = desirePosition.position;
             desirePosition.position = Vector3.zero;
@@ -25,13 +34,13 @@ namespace Source.UI.MenuScreen
 
         public void Play()
         { 
-           GameManager.GetCustomComponent<GameStateManager>().SetGameState(GameStateManager.GameState.Play);
+           GameStateManager.Instance.SetGameState(GameStateManager.GameState.Play);
            AudioManager.Instance.Play("Click_02");
         }
         
         public void OpenRecord()
         {
-            GameManager.GetCustomComponent<GameStateManager>().SetGameState(GameStateManager.GameState.Records);
+            GameStateManager.Instance.SetGameState(GameStateManager.GameState.Records);
         }
     }
 }
