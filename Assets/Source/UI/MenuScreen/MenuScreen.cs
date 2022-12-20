@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using DG.Tweening;
 using Source.Managers.Audio;
 using Source.Managers.GameState;
+using Source.Managers.Score;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,27 +21,40 @@ namespace Source.UI.MenuScreen
         {
             _firstSelectedButton.GetComponent<Button>().Select();
             var desirePosition = transform;
-            var size = desirePosition.position;
-            desirePosition.position = Vector3.zero;
-            var tweener = transform.DOMove(size, 1f).SetEase(Ease.OutSine);
+            var size = desirePosition.localScale;
+            desirePosition.localScale = Vector3.zero;
+            var tweener = transform.DOScale(size, 1f).SetEase(Ease.OutSine);
 
             await tweener.AsyncWaitForCompletion();
         }
 
-        public void TogleSound()
+        public void ToggleSound()
         {
             AudioManager.Instance.TogleAudioVolume();
         }
 
         public void Play()
         { 
-           GameStateManager.Instance.SetGameState(GameStateManager.GameState.Play);
            AudioManager.Instance.Play("Click_02");
+           GameStateManager.Instance.SetGameState(GameStateManager.GameState.Play);
         }
         
-        public void OpenRecord()
+        public async void OpenRecord()
         {
-            GameStateManager.Instance.SetGameState(GameStateManager.GameState.Records);
+            AudioManager.Instance.Play("Click_02");
+            await WindowManager.Instance.Open<RecordsScreen.RecordScreen>(ScoreStorage.SortedRecords);
+
+        }
+        
+        public void ClearRecords()
+        {
+            AudioManager.Instance.Play("Click_02");
+            ScoreStorage.ClearRecords();
+        }
+        
+        public void ExitGame()
+        {
+            Application.Quit();
         }
     }
 }

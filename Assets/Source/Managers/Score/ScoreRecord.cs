@@ -6,9 +6,9 @@ namespace Source.Managers.Score
     public class ScoreRecord
     {
         public float Score;
-        public DateTime Date;
+        public string Date;
 
-        public ScoreRecord(float score, DateTime dateTime)
+        public ScoreRecord(float score, string dateTime)
         {
             Score = score;
             Date = dateTime;

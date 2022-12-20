@@ -22,6 +22,7 @@ namespace Source.Managers.GameState
         public void Start()
         {
             SetGameState(_stateOnStartup);
+            ScoreStorage.LoadFromFile();
         }
 
         public void SetGameState(GameState state)
@@ -42,15 +43,16 @@ namespace Source.Managers.GameState
                     _state = new MenuState();
                     _state.Set();
                     break;
-                case GameState.Records:
-                    _state = new RecordState();
-                    _state.Set();
-                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
             _currentState = state;
+        }
+
+        public void OnApplicationQuit()
+        {
+            ScoreStorage.SaveToFile();
         }
     }
 }

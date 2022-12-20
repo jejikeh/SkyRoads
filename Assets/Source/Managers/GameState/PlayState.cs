@@ -12,7 +12,7 @@ namespace Source.Managers.GameState
         
         public override void Set()
         {
-            SceneManager.LoadScene("Component");
+            SceneManager.LoadScene("Game");
             SceneManager.sceneLoaded += OpenGameScreen;
             AudioManager.Instance.Play("Engine");
 

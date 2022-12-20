@@ -1,4 +1,5 @@
-﻿using Source.Managers.BoostSpeedMultiplier;
+﻿using System;
+using Source.Managers.BoostSpeedMultiplier;
 using UnityEngine;
 
 namespace Source.Managers.Score
@@ -7,11 +8,12 @@ namespace Source.Managers.Score
     {
         public float Score { get; private set; }
         public float HighestScore { get; private set; }
-
+        
         [SerializeField] private BoostSpeedMultiplierManager _boostSpeedMultiplierManager;
         [SerializeField] private float _scoreScale = 1f;
         [SerializeField] private float _bonus = 10f;
-
+    
+        
         private void Start()
         {
             Score = 0f;

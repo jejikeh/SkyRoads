@@ -48,15 +48,16 @@ namespace Source.Entities.Ship
             UpdateComponents();
         }
 
+        private bool _dead = false;
         private async void OnTriggerEnter(Collider other)
         {
-            if (!other.CompareTag("Asteroid")) return;
+            if (!other.CompareTag("Asteroid") || _dead) return;
             GameStateManager.Instance.SetGameState(GameStateManager.GameState.Dead);
             GetComponent<MeshRenderer>().enabled = false;
             var explosion = Instantiate(_explosionEffect, transform);
             explosion.transform.localPosition = Vector3.zero;
             await Task.Delay(1000);
-            gameObject.SetActive(false);
+            _dead = true;
         }
 
         protected override void OnDestroy()

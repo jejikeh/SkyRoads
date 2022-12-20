@@ -39,7 +39,6 @@ namespace Source.UI.DeadScreen
             if (Data is DeadScreenData)
                 _score = Data as DeadScreenData;
             
-            
             _scoreText.text = $"Your score: {_score?.Score}\n";
             _scoreText.text += _score.IsNewScoreEqualToRecord ? "You win!" : "You lose";
             await tweener.AsyncWaitForCompletion();

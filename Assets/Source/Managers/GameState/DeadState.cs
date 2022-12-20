@@ -25,12 +25,13 @@ namespace Source.Managers.GameState
 
             var deadScreenData = new DeadScreen.DeadScreenData(_scoreManager.Score,
             Math.Abs(_scoreManager.Score - _scoreManager.HighestScore) < 0.001);
+            ScoreStorage.SaveToFile();
+            _scoreManager.Reset();
             await WindowManager.Instance.Open<DeadScreen>(deadScreenData);
         }
 
         public override async void Unset()
         {
-            _scoreManager.Reset();
             await WindowManager.Instance.Close<DeadScreen>();
         }
     }
