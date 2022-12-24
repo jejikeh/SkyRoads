@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Asteroid
+  - Fuel
   layers:
   - Default
   - TransparentFX

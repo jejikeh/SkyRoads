@@ -5,6 +5,7 @@ using Source.EntityComponents.MoveForward;
 using Source.EntityComponents.SmoothTransformRotate;
 using Source.Managers.BoostSpeedMultiplier;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Source.Entities.Asteroid
@@ -13,7 +14,7 @@ namespace Source.Entities.Asteroid
     {
         [SerializeField] private MoveForwardComponentConfig _moveForwardConfig;
         [SerializeField] private SmoothTransformRotateConfig _smoothTransformRotateConfig;
-        [SerializeField] private ClampPositionComponentConfig ClampPositionComponentConfig;
+        [FormerlySerializedAs("ClampPositionComponentConfig")] [SerializeField] private ClampPositionComponentConfig _clampPositionComponentConfig;
         [SerializeField] private float _minSize;
         [SerializeField] private float _maxSize;
         private BoostSpeedMultiplierManager _boostSpeedMultiplierManager;
@@ -28,7 +29,7 @@ namespace Source.Entities.Asteroid
             var randomDirection = new Vector3(Random.Range(0.1f, 1f), Random.Range(0.1f, 1f), Random.Range(0.1f, 1f));
             AddCustomComponent(new SmoothTransformRotateComponent(_smoothTransformRotateConfig, _boostSpeedMultiplierManager))
                 .RotateBeyond360(randomDirection);
-            AddCustomComponent(new ClampPositionComponent(ClampPositionComponentConfig));
+            AddCustomComponent(new ClampPositionComponent(_clampPositionComponentConfig));
             
             transform.localScale = Vector3.zero;
             var randomScale = Random.Range(_minSize, _maxSize);

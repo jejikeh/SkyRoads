@@ -436,6 +436,7 @@ GameObject:
   - component: {fileID: 1537852674}
   - component: {fileID: 1537852673}
   - component: {fileID: 1537852672}
+  - component: {fileID: 1537852675}
   m_Layer: 0
   m_Name: DustEffect
   m_TagString: Untagged
@@ -5237,6 +5238,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1537852675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537852671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd839e2c45ed2ce1eab7e64f5d85f9bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _particleSystem: {fileID: 1537852673}
+  _boostSpeedMultiplierManager: {fileID: 1559935494}
+  _defaultSpeed: 6
 --- !u!1 &1559935493
 GameObject:
   m_ObjectHideFlags: 0
@@ -5769,13 +5785,57 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 7783638062515022899, guid: 5b2556011cb03104d9ea5d69741c16dc, type: 3}
-      propertyPath: _objectPrefab.Array.size
-      value: 1
+      propertyPath: _maxSpawnTimer
+      value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 7783638062515022899, guid: 5b2556011cb03104d9ea5d69741c16dc, type: 3}
+      propertyPath: _objectPrefab.Array.size
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7783638062515022899, guid: 5b2556011cb03104d9ea5d69741c16dc, type: 3}
+      propertyPath: _objectPrefab.Array.data[1]
+      value: 
+      objectReference: {fileID: 7857694764860891678, guid: 444de69d1ba1d0a4f9c416e47a52a534, type: 3}
+    - target: {fileID: 7783638062515022899, guid: 5b2556011cb03104d9ea5d69741c16dc, type: 3}
+      propertyPath: _objectPrefab.Array.data[2]
+      value: 
+      objectReference: {fileID: 7857694764860891678, guid: 444de69d1ba1d0a4f9c416e47a52a534, type: 3}
+    - target: {fileID: 7783638062515022899, guid: 5b2556011cb03104d9ea5d69741c16dc, type: 3}
+      propertyPath: _objectPrefab.Array.data[3]
+      value: 
+      objectReference: {fileID: 7857694764860891678, guid: 444de69d1ba1d0a4f9c416e47a52a534, type: 3}
+    - target: {fileID: 7783638062515022899, guid: 5b2556011cb03104d9ea5d69741c16dc, type: 3}
+      propertyPath: _objectPrefab.Array.data[4]
+      value: 
+      objectReference: {fileID: 7857694764860891678, guid: 444de69d1ba1d0a4f9c416e47a52a534, type: 3}
+    - target: {fileID: 7783638062515022899, guid: 5b2556011cb03104d9ea5d69741c16dc, type: 3}
+      propertyPath: _objectPrefab.Array.data[5]
+      value: 
+      objectReference: {fileID: 7857694764860891678, guid: 444de69d1ba1d0a4f9c416e47a52a534, type: 3}
+    - target: {fileID: 7783638062515022899, guid: 5b2556011cb03104d9ea5d69741c16dc, type: 3}
+      propertyPath: _objectPrefab.Array.data[6]
+      value: 
+      objectReference: {fileID: 7857694764860891678, guid: 444de69d1ba1d0a4f9c416e47a52a534, type: 3}
+    - target: {fileID: 7783638062515022899, guid: 5b2556011cb03104d9ea5d69741c16dc, type: 3}
+      propertyPath: _objectPrefab.Array.data[7]
+      value: 
+      objectReference: {fileID: 7857694764860891678, guid: 444de69d1ba1d0a4f9c416e47a52a534, type: 3}
+    - target: {fileID: 7783638062515022899, guid: 5b2556011cb03104d9ea5d69741c16dc, type: 3}
+      propertyPath: _objectPrefab.Array.data[8]
+      value: 
+      objectReference: {fileID: 7857694764860891678, guid: 444de69d1ba1d0a4f9c416e47a52a534, type: 3}
+    - target: {fileID: 7783638062515022899, guid: 5b2556011cb03104d9ea5d69741c16dc, type: 3}
+      propertyPath: _objectPrefab.Array.data[9]
+      value: 
+      objectReference: {fileID: 7857694764860891678, guid: 444de69d1ba1d0a4f9c416e47a52a534, type: 3}
     - target: {fileID: 7783638062515022899, guid: 5b2556011cb03104d9ea5d69741c16dc, type: 3}
       propertyPath: _boostSpeedMultiplierManager
       value: 
       objectReference: {fileID: 1559935494}
+    - target: {fileID: 7783638062515022899, guid: 5b2556011cb03104d9ea5d69741c16dc, type: 3}
+      propertyPath: _objectPrefab.Array.data[10]
+      value: 
+      objectReference: {fileID: 7857694764860891678, guid: 1d4e56cf22d1eff4c9eb856241b4b638, type: 3}
     - target: {fileID: 7783638062515022924, guid: 5b2556011cb03104d9ea5d69741c16dc, type: 3}
       propertyPath: m_RootOrder
       value: 10

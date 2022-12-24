@@ -23,6 +23,7 @@ namespace Source.Managers.Audio
                 mute = !mute;
                 audioSource.mute = mute;
                 _isForceMute = mute;
+				
             }
             foreach (var audioSource in _audioMusicSources)
                 audioSource.mute = !audioSource.mute;
