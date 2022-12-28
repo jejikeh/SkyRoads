@@ -7,13 +7,13 @@ namespace Source.Core
     public abstract class EntityComponent<T> : ICustomComponent where T : ICustomComponentConfig
     {
         public bool Enabled => _enabled;
-        
-        #region EnableDisable
-        
+        protected T ComponentConfig { get; }
         private bool _enabled = true;
         
-        protected virtual void OnEnable() { }
-        protected virtual void OnDisable() { }
+        private void OnEnable() { }
+        
+        private void OnDisable() { }
+        
         protected virtual void OnDestroy() { }
         
         /// <summary>
@@ -39,10 +39,6 @@ namespace Source.Core
             OnDestroy();
         }
         
-        #endregion
-
-        protected T ComponentConfig { get; }
-
         protected EntityComponent(T componentConfig)
         {
             ComponentConfig = componentConfig;
