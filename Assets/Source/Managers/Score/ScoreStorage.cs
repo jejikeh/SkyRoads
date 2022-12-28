@@ -11,6 +11,7 @@ namespace Source.Managers.Score
     {
         public List<ScoreRecord> ScoreRecords;
     }
+    
     [Serializable]
     public static class ScoreStorage
     {

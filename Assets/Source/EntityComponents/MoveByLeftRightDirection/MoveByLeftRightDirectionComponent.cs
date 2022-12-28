@@ -7,6 +7,7 @@ namespace Source.EntityComponents.MoveByLeftRightDirection
     public class MoveByLeftRightDirectionComponent : EntityComponent<MoveByLeftRightDirectionComponentConfig>
     {
         private readonly BoostSpeedMultiplierManager _boostSpeedMultiplierManager;
+        
         public MoveByLeftRightDirectionComponent(MoveByLeftRightDirectionComponentConfig componentConfig,
             BoostSpeedMultiplierManager boostSpeedMultiplierManager) : base(componentConfig)
         {

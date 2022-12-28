@@ -20,6 +20,7 @@ namespace Source.EntityComponents.SmoothFollowTarget
             var desiredPosition = ComponentConfig.Target.position + ComponentConfig.Offset;
             if (ComponentConfig.AffectBySpeed)
                 desiredPosition -= Vector3.forward * _boostSpeedMultiplierManager.MoveMultiplier;
+            
             ComponentConfig.Handler.position = Vector3.SmoothDamp(ComponentConfig.Handler.position, desiredPosition, ref _velocity, ComponentConfig.SmoothTime * Time.deltaTime);
         }
     }

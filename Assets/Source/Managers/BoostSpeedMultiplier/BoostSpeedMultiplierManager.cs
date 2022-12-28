@@ -7,12 +7,6 @@ namespace Source.Managers.BoostSpeedMultiplier
 {
     public class BoostSpeedMultiplierManager : MonoBehaviour
     {
-        public float MoveMultiplier { get; private set; }
-        public float TurnMultiplier { get; private set; }
-        public float ScoreMultiplier { get; private set; }
-        public float RotateMultiplier { get; private set; }
-        public float ChangeSpeedDuration { get; private set; }
-        
         [SerializeField] private Ease _boostEase;
         [SerializeField] private float _duration;
         
@@ -35,7 +29,13 @@ namespace Source.Managers.BoostSpeedMultiplier
         [SerializeField] private float _defaultScoreMultiplier;
         [SerializeField] private float _boostScoreMultiplier;
         [SerializeField] private float _stopScoreMultiplier;
-
+        
+        public float MoveMultiplier { get; private set; }
+        public float TurnMultiplier { get; private set; }
+        public float ScoreMultiplier { get; private set; }
+        public float RotateMultiplier { get; private set; }
+        public float ChangeSpeedDuration { get; private set; }
+        
         private float _normalizeFactor;
 
         private void Start()

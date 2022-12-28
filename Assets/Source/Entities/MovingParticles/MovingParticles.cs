@@ -11,23 +11,16 @@ namespace Source.Entities.MovingParticles
         [SerializeField] private ParticleSystem _particleSystem;
         [SerializeField] private BoostSpeedMultiplierManager _boostSpeedMultiplierManager;
         [SerializeField] private float _defaultSpeed;
-
-        private void Start()
-        {
-            
-        }
         
         private void Update()
         {
-                SetStartSpeed(_boostSpeedMultiplierManager.MoveMultiplier);
+            SetStartSpeed(_boostSpeedMultiplierManager.MoveMultiplier);
         }
 
         private void SetStartSpeed(float speed)
         {
-            //_particleSystem.Stop();
             var particleMainSettings = _particleSystem.main;
             particleMainSettings.startSpeed = _defaultSpeed*  speed;
-            //_particleSystem.Play();
         }
     }
 }

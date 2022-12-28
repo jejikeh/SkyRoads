@@ -14,6 +14,7 @@ namespace Source.Entities.Ship
         [SerializeField] private BoostSpeedMultiplierManager _boostSpeedMultiplierManager;
 
         private MoveByLeftRightDirectionComponent _moveByLeftRightDirectionComponent; 
+        
         private void Start()
         {
             AddCustomComponent(new ClampPositionComponent(_clampPositionConfig));

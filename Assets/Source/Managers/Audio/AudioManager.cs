@@ -8,12 +8,13 @@ namespace Source.Managers.Audio
 {
     public class AudioManager : Singleton<AudioManager>
     {
-        private float _globalVolume = 1f;
         [SerializeField] private List<AudioSource> _audioUISources = new List<AudioSource>();
         [SerializeField] private List<AudioSource> _audioGameSources = new List<AudioSource>();
         [SerializeField] private List<AudioSource> _audioMusicSources = new List<AudioSource>();
         [SerializeField] public List<AudioItem> AudioClips = new List<AudioItem>();
 
+        private readonly float _globalVolume = 1f;
+        
         public static void ToggleAudioVolume()
         {
             foreach (var audioSource in Instance._audioGameSources)

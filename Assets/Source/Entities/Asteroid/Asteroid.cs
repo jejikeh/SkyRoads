@@ -5,7 +5,6 @@ using Source.EntityComponents.MoveForward;
 using Source.EntityComponents.SmoothTransformRotate;
 using Source.Managers.BoostSpeedMultiplier;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Source.Entities.Asteroid
@@ -14,11 +13,11 @@ namespace Source.Entities.Asteroid
     {
         [SerializeField] private MoveForwardComponentConfig _moveForwardConfig;
         [SerializeField] private SmoothTransformRotateConfig _smoothTransformRotateConfig;
-        [FormerlySerializedAs("ClampPositionComponentConfig")] [SerializeField] private ClampPositionComponentConfig _clampPositionComponentConfig;
+        [SerializeField] private ClampPositionComponentConfig _clampPositionComponentConfig;
         [SerializeField] private float _minSize;
         [SerializeField] private float _maxSize;
+        
         private BoostSpeedMultiplierManager _boostSpeedMultiplierManager;
-
         
         private void Start()
         {

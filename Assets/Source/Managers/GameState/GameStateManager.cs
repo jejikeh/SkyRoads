@@ -7,8 +7,6 @@ namespace Source.Managers.GameState
 {
     public class GameStateManager : Singleton<GameStateManager>
     {
-        private static GameState _currentState;
-        private static State _state;
         [SerializeField] private GameState _stateOnStartup;
         
         public enum GameState
@@ -18,6 +16,12 @@ namespace Source.Managers.GameState
             Menu,
         }
 
+        private static State _state;
+        private static GameState _currentState;
+        private static readonly PlayState _playState = new PlayState();
+        private static readonly DeadState _deadState = new DeadState();
+        private static readonly MenuState _menuState = new MenuState();
+        
         public void Start()
         {
             SetGameState(_stateOnStartup);
@@ -31,15 +35,15 @@ namespace Source.Managers.GameState
             switch (state)
             {
                 case GameState.Play:
-                    _state = new PlayState();
+                    _state = _playState;
                     _state.Set();
                     break;
                 case GameState.Dead:
-                    _state = new DeadState(FindObjectOfType<ScoreManager>());
-                    _state.Set();
+                    _state = _deadState;
+                    _state.Set(FindObjectOfType<ScoreManager>());
                     break;
                 case GameState.Menu:
-                    _state = new MenuState();
+                    _state = _menuState;
                     _state.Set();
                     break;
                 default:

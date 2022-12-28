@@ -5,13 +5,12 @@ namespace Source.Managers.Score
 {
     public class ScoreManager : MonoBehaviour
     {
-        public float Score { get; private set; }
-        public float HighestScore { get; private set; }
-        
         [SerializeField] private BoostSpeedMultiplierManager _boostSpeedMultiplierManager;
         [SerializeField] private float _scoreScale = 1f;
         [SerializeField] private float _bonus = 10f;
-    
+        
+        public float Score { get; private set; }
+        public float HighestScore { get; private set; }
         
         private void Start()
         {

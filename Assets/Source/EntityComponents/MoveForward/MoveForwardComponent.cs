@@ -6,7 +6,7 @@ namespace Source.EntityComponents.MoveForward
 {
     public class MoveForwardComponent : EntityComponent<MoveForwardComponentConfig>
     {
-        private BoostSpeedMultiplierManager _boostSpeedMultiplierManager;
+        private readonly BoostSpeedMultiplierManager _boostSpeedMultiplierManager;
 
         public MoveForwardComponent(MoveForwardComponentConfig componentConfig,
             BoostSpeedMultiplierManager boostSpeedMultiplierManager) : base(componentConfig)

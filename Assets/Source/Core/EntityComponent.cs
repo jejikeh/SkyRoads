@@ -41,12 +41,11 @@ namespace Source.Core
         
         #endregion
 
-        protected T ComponentConfig => _componentConfig;
-        private readonly T _componentConfig;
+        protected T ComponentConfig { get; }
 
         protected EntityComponent(T componentConfig)
         {
-            _componentConfig = componentConfig;
+            ComponentConfig = componentConfig;
         }
 
         /// <summary>

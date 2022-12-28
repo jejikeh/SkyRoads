@@ -13,6 +13,7 @@ namespace Source.Entities.ObjectSpawner
         [SerializeField] private Vector2 _minSize;
         [SerializeField] private float _maxSpawnTimer;
         [SerializeField] private List<GameObject> _objectPrefab;
+        
         private float _randomObjectRespawnTime;
         private float _currentTime;
 
@@ -30,12 +31,12 @@ namespace Source.Entities.ObjectSpawner
         private void Update()
         {
             _currentTime += Time.deltaTime;
-            if (_currentTime > _randomObjectRespawnTime)
-            {
-                Spawn();
-                _currentTime = 0;
-                _randomObjectRespawnTime = Random.Range(0, _maxSpawnTimer / _boostSpeedMultiplierManager.MoveMultiplier);
-            }
+            if (!(_currentTime > _randomObjectRespawnTime)) 
+                return;
+            
+            Spawn();
+            _currentTime = 0;
+            _randomObjectRespawnTime = Random.Range(0, _maxSpawnTimer / _boostSpeedMultiplierManager.MoveMultiplier);
 
         }
         

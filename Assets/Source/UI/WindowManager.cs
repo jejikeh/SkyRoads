@@ -11,6 +11,7 @@ namespace Source.UI
     {
         [SerializeField] private List<GameObject> _windowPrefabs;
         [SerializeField] private Canvas _canvas;
+        
         private List<Window> _windows = new List<Window>();
         private EventSystem _eventSystem;
         
@@ -21,7 +22,6 @@ namespace Source.UI
             var windowPrefab = Instance._windowPrefabs.Find(x => x.GetComponent<T>() != null);
             var window = Instantiate(windowPrefab, Instance._canvas.transform).GetComponent<T>();
             Instance._windows.Add(window);
-            
             Instance._eventSystem.firstSelectedGameObject = window.GetFirstSelectedButton();
             
             await window.OnOpenStart(data);

@@ -14,14 +14,16 @@ namespace Source.Entities.Camera
         [SerializeField] private BoostSpeedMultiplierManager _boostSpeedMultiplierManager;
         [SerializeField] private CameraSpeedEffectsChangerComponentConfig _cameraEffectsChangerComponentConfig;
         [SerializeField] private SmoothFollowTargetComponentConfig _smoothFollowTargetConfig;
-        [SerializeField]
-        private SmoothTransformRotateConfig _smoothTransformRotateConfig;
+        [SerializeField] private SmoothTransformRotateConfig _smoothTransformRotateConfig;
+
+        private SmoothTransformRotateComponent _smoothTransformRotateComponent;
+        private CameraSpeedEffectsChangerComponent _cameraSpeedEffectsChangerComponent;
         
         private void Start()
         {
             AddCustomComponent(new SmoothFollowTargetComponent(_smoothFollowTargetConfig, _boostSpeedMultiplierManager));
-            AddCustomComponent(new SmoothTransformRotateComponent(_smoothTransformRotateConfig, _boostSpeedMultiplierManager));
-            AddCustomComponent(new CameraSpeedEffectsChangerComponent(_cameraEffectsChangerComponentConfig, _boostSpeedMultiplierManager));
+            _smoothTransformRotateComponent =  AddCustomComponent(new SmoothTransformRotateComponent(_smoothTransformRotateConfig, _boostSpeedMultiplierManager));
+            _cameraSpeedEffectsChangerComponent = AddCustomComponent(new CameraSpeedEffectsChangerComponent(_cameraEffectsChangerComponentConfig, _boostSpeedMultiplierManager));
 
             PlayerInputUserManager.Input.DefaultSpeedMode.performed += Default;
             PlayerInputUserManager.Input.BoostSpeedMode.performed += Boost;
@@ -32,22 +34,22 @@ namespace Source.Entities.Camera
 
         private void Boost(InputAction.CallbackContext context)
         {
-            GetCustomComponent<CameraSpeedEffectsChangerComponent>().Boost();
+            _cameraSpeedEffectsChangerComponent.Boost();
         }
 
         private void Default(InputAction.CallbackContext context)
         {
-            GetCustomComponent<CameraSpeedEffectsChangerComponent>().Default();
+            _cameraSpeedEffectsChangerComponent.Default();
         }
 
         private void Stop(InputAction.CallbackContext context)
         {
-            GetCustomComponent<CameraSpeedEffectsChangerComponent>().Stop();
+            _cameraSpeedEffectsChangerComponent.Stop();
         }
 
         private void RotateOnPerformMoveAction(InputAction.CallbackContext obj)
         {
-            GetCustomComponent<SmoothTransformRotateComponent>().Rotate(obj.ReadValue<Vector2>());
+            _smoothTransformRotateComponent.Rotate(obj.ReadValue<Vector2>());
         }
 
         protected override void OnDestroy()

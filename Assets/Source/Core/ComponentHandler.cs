@@ -12,6 +12,7 @@ namespace Source.Core
             foreach (var component in specificComponents)
                 _components.Add(component);
         }
+        
         /// <summary>
         /// Add Custom component to entity
         /// </summary>

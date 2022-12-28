@@ -13,7 +13,7 @@ namespace Source.EntityComponents.CameraSpeedFovChanger
         public float FovStop;
         public Camera Camera;
         
-        [Header("Shaker")]
+        [Header("Shake")]
         public float ShakeStrength;
         public float ShakeDuration;
         public int ShakeVibration;

@@ -5,8 +5,9 @@ namespace Source.Core
 {
     public class Entity : MonoBehaviour
     {
+        protected float GlobalEntityTimeScale => _entityTimeScale;
+        
         private static float _entityTimeScale = 1f;
-        public float GlobalEntityTimeScale => _entityTimeScale;
         private readonly ComponentHandler _componentHandler = new ComponentHandler();
         
         public T AddCustomComponent<T>(T component) where T : ICustomComponent

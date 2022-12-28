@@ -10,18 +10,6 @@ namespace Source.UI.DeadScreen
 {
     public class DeadScreen : Window
     {
-        public class DeadScreenData
-        {
-            public float Score;
-            public bool IsNewScoreEqualToRecord;
-
-            public DeadScreenData(float score, bool isNewScoreEqualToRecord)
-            {
-                Score = score;
-                IsNewScoreEqualToRecord = isNewScoreEqualToRecord;
-            }
-        }
-        
         [SerializeField] private TMP_Text _scoreText;
         [SerializeField] private GameObject _firstSelectedButton;
         private DeadScreenData _score;
@@ -32,16 +20,16 @@ namespace Source.UI.DeadScreen
             var desireSize = transform;
             var size = desireSize.localScale;
             desireSize.localScale = Vector3.zero;
-            var tweener = transform.DOScale(size, 1f);
+            var tween = transform.DOScale(size, 1f);
             _scoreText.alpha = 0f;
             _scoreText.DOFade(1f, 1f);
             
-            if (Data is DeadScreenData)
-                _score = Data as DeadScreenData;
+            if (Data is DeadScreenData data)
+                _score = data;
             
             _scoreText.text = $"Your score: {_score?.Score}\n";
             _scoreText.text += _score.IsNewScoreEqualToRecord ? "You win!" : "You lose";
-            await tweener.AsyncWaitForCompletion();
+            await tween.AsyncWaitForCompletion();
         }
 
         public void RestartScene()

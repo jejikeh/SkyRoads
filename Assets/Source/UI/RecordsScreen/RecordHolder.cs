@@ -7,6 +7,7 @@ namespace Source.UI.RecordsScreen
     public class RecordHolder : MonoBehaviour
     {
         [SerializeField] private GameObject _recordUIItemPrefab;
+        
         private void Start()
         {
             for (var i = 0; i < ScoreStorage.SortedRecords.Count; i++)

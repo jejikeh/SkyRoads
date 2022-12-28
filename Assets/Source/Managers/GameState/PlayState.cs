@@ -10,7 +10,7 @@ namespace Source.Managers.GameState
     {
         private string _playerTrack;
         
-        public override void Set()
+        public override void Set(object data = null)
         {
             SceneManager.LoadScene("Game");
             SceneManager.sceneLoaded += OpenGameScreen;

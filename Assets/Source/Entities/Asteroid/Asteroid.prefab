@@ -55,7 +55,7 @@ MonoBehaviour:
     RotateAngle: 0
     RotateTime: 0
     RotatedTransform: {fileID: 7857694765374466271}
-  ClampPositionComponentConfig:
+  _clampPositionComponentConfig:
     LimitMinXPosition: -4
     LimitMaxXPosition: 4
     LimitMinYPosition: 1.5

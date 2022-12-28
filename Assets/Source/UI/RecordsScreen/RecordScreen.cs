@@ -36,8 +36,7 @@ namespace Source.UI.RecordsScreen
 
         protected override async Task CloseStart()
         {
-            var tweener = transform.DOScale(Vector3.zero, 0.25f).SetEase(Ease.OutSine);
-            await tweener.AsyncWaitForCompletion();
+            await transform.DOScale(Vector3.zero, 0.25f).SetEase(Ease.OutSine).AsyncWaitForCompletion();
         }
 
         public async void BackToMainMenu()
