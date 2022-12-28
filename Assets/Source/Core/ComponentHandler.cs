@@ -7,6 +7,8 @@ namespace Source.Core
 {
     public class ComponentHandler : IComponentHandler
     {
+        private readonly List<ICustomComponent> _components = new List<ICustomComponent>();
+
         public ComponentHandler(params ICustomComponent[] specificComponents)
         {
             foreach (var component in specificComponents)
@@ -114,7 +116,5 @@ namespace Source.Core
         {
             _components.Clear();
         }
-        
-        private readonly List<ICustomComponent> _components = new List<ICustomComponent>();
     }
 }
