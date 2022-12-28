@@ -46,14 +46,14 @@ namespace Source.UI.DeadScreen
 
         public void RestartScene()
         {
-            GameStateManager.Instance.SetGameState(GameStateManager.GameState.Play);
-            AudioManager.Instance.Play("Click_02");
+            GameStateManager.SetGameState(GameStateManager.GameState.Play);
+            AudioManager.Play("Click_02");
         }
 
         public void GoToMainMenu()
         {
-            GameStateManager.Instance.SetGameState(GameStateManager.GameState.Menu);
-            AudioManager.Instance.Play("Click_02");
+            GameStateManager.SetGameState(GameStateManager.GameState.Menu);
+            AudioManager.Play("Click_02");
         }
 
         public override GameObject GetFirstSelectedButton()

@@ -4,7 +4,7 @@ namespace Source.Managers
 {
     public class PlayerInputUserManager : Singleton<PlayerInputUserManager>
     {
-        public PlayerInput.PlayerActions Input => _input.Player;
+        public static PlayerInput.PlayerActions Input => Instance._input.Player;
         private PlayerInput _input;
 
         protected override void Awake()

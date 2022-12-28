@@ -30,8 +30,7 @@ namespace Source.UI.RecordsScreen
             var size = desirePosition.localScale;
             desirePosition.localScale = Vector3.zero;
             var tweener = transform.DOScale(size, 0.25f).SetEase(Ease.OutSine);
-
-
+            
             await tweener.AsyncWaitForCompletion();
         }
 
@@ -43,8 +42,8 @@ namespace Source.UI.RecordsScreen
 
         public async void BackToMainMenu()
         {
-            AudioManager.Instance.Play("Click_02");
-            await WindowManager.Instance.Close<RecordScreen>();
+            AudioManager.Play("Click_02");
+            await WindowManager.Close<RecordScreen>();
         }
 
         private void UpdateList(List<ScoreRecord> scoreRecords)

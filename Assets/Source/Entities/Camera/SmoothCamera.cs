@@ -23,11 +23,11 @@ namespace Source.Entities.Camera
             AddCustomComponent(new SmoothTransformRotateComponent(_smoothTransformRotateConfig, _boostSpeedMultiplierManager));
             AddCustomComponent(new CameraSpeedEffectsChangerComponent(_cameraEffectsChangerComponentConfig, _boostSpeedMultiplierManager));
 
-            PlayerInputUserManager.Instance.Input.DefaultSpeedMode.performed += Default;
-            PlayerInputUserManager.Instance.Input.BoostSpeedMode.performed += Boost;
-            PlayerInputUserManager.Instance.Input.StopSpeedMode.performed += Stop;
-            PlayerInputUserManager.Instance.Input.Move.performed += RotateOnPerformMoveAction;
-            PlayerInputUserManager.Instance.Input.Move.canceled += RotateOnPerformMoveAction;
+            PlayerInputUserManager.Input.DefaultSpeedMode.performed += Default;
+            PlayerInputUserManager.Input.BoostSpeedMode.performed += Boost;
+            PlayerInputUserManager.Input.StopSpeedMode.performed += Stop;
+            PlayerInputUserManager.Input.Move.performed += RotateOnPerformMoveAction;
+            PlayerInputUserManager.Input.Move.canceled += RotateOnPerformMoveAction;
         }
 
         private void Boost(InputAction.CallbackContext context)
@@ -52,11 +52,11 @@ namespace Source.Entities.Camera
 
         protected override void OnDestroy()
         {
-            PlayerInputUserManager.Instance.Input.DefaultSpeedMode.performed -= Default;
-            PlayerInputUserManager.Instance.Input.BoostSpeedMode.performed -= Boost;
-            PlayerInputUserManager.Instance.Input.StopSpeedMode.performed -= Stop;
-            PlayerInputUserManager.Instance.Input.Move.performed -= RotateOnPerformMoveAction;
-            PlayerInputUserManager.Instance.Input.Move.canceled -= RotateOnPerformMoveAction;
+            PlayerInputUserManager.Input.DefaultSpeedMode.performed -= Default;
+            PlayerInputUserManager.Input.BoostSpeedMode.performed -= Boost;
+            PlayerInputUserManager.Input.StopSpeedMode.performed -= Stop;
+            PlayerInputUserManager.Input.Move.performed -= RotateOnPerformMoveAction;
+            PlayerInputUserManager.Input.Move.canceled -= RotateOnPerformMoveAction;
             
             base.OnDestroy();
         }

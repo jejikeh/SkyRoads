@@ -14,23 +14,23 @@ namespace Source.Managers.GameState
         {
             SceneManager.LoadScene("Game");
             SceneManager.sceneLoaded += OpenGameScreen;
-            AudioManager.Instance.Play("Engine");
+            AudioManager.Play("Engine");
 
             string[] tracks = { "equinox", "onthenigthway", "homeresonance" };
             _playerTrack = tracks[Random.Range(0, tracks.Length)];
-            AudioManager.Instance.Play(_playerTrack);
+            AudioManager.Play(_playerTrack);
         }
 
         private async void OpenGameScreen(Scene scene, LoadSceneMode loadSceneMode)
         {
-            await WindowManager.Instance.Open<GameScreen>(null);
+            await WindowManager.Open<GameScreen>(null);
         } 
         
         public override async void Unset()
         {
-            AudioManager.Instance.Stop(_playerTrack);
+            AudioManager.Stop(_playerTrack);
             SceneManager.sceneLoaded -= OpenGameScreen;
-            await WindowManager.Instance.Close<GameScreen>();
+            await WindowManager.Close<GameScreen>();
         }
     }
 }

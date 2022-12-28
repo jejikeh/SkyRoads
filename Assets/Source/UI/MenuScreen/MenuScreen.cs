@@ -30,25 +30,24 @@ namespace Source.UI.MenuScreen
 
         public void ToggleSound()
         {
-            AudioManager.Instance.TogleAudioVolume();
+            AudioManager.ToggleAudioVolume();
         }
 
         public void Play()
         { 
-           AudioManager.Instance.Play("Click_02");
-           GameStateManager.Instance.SetGameState(GameStateManager.GameState.Play);
+           AudioManager.Play("Click_02");
+           GameStateManager.SetGameState(GameStateManager.GameState.Play);
         }
         
         public async void OpenRecord()
         {
-            AudioManager.Instance.Play("Click_02");
-            await WindowManager.Instance.Open<RecordsScreen.RecordScreen>(ScoreStorage.SortedRecords);
-
-        }
+            AudioManager.Play("Click_02");
+            await WindowManager.Open<RecordsScreen.RecordScreen>(ScoreStorage.SortedRecords);
+        }   
         
         public void ClearRecords()
         {
-            AudioManager.Instance.Play("Click_02");
+            AudioManager.Play("Click_02");
             ScoreStorage.ClearRecords();
         }
         

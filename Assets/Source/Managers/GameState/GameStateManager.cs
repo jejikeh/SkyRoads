@@ -16,7 +16,6 @@ namespace Source.Managers.GameState
             Play,
             Dead,
             Menu,
-            Records
         }
 
         public void Start()
@@ -25,7 +24,7 @@ namespace Source.Managers.GameState
             ScoreStorage.LoadFromFile();
         }
 
-        public void SetGameState(GameState state)
+        public static void SetGameState(GameState state)
         {
             if(state == _currentState) return;
             _state?.Unset();

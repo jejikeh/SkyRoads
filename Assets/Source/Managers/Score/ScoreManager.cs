@@ -1,5 +1,4 @@
-﻿using System;
-using Source.Managers.BoostSpeedMultiplier;
+﻿using Source.Managers.BoostSpeedMultiplier;
 using UnityEngine;
 
 namespace Source.Managers.Score

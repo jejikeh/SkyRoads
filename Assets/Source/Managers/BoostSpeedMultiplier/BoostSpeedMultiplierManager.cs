@@ -46,9 +46,9 @@ namespace Source.Managers.BoostSpeedMultiplier
             RotateMultiplier = _defaultRotateMultiplier;
             
             ChangeSpeedDuration = _duration;
-            PlayerInputUserManager.Instance.Input.BoostSpeedMode.performed += Boost;
-            PlayerInputUserManager.Instance.Input.DefaultSpeedMode.performed += Default;
-            PlayerInputUserManager.Instance.Input.StopSpeedMode.performed += Stop;
+            PlayerInputUserManager.Input.BoostSpeedMode.performed += Boost;
+            PlayerInputUserManager.Input.DefaultSpeedMode.performed += Default;
+            PlayerInputUserManager.Input.StopSpeedMode.performed += Stop;
 
             _normalizeFactor = MoveMultiplier - 1;
         }
@@ -124,14 +124,14 @@ namespace Source.Managers.BoostSpeedMultiplier
         
         public void Update()
         {
-            AudioManager.Instance.SetPitch("Engine", MoveMultiplier - _normalizeFactor);
+            AudioManager.SetPitch("Engine", MoveMultiplier - _normalizeFactor);
         }
 
         protected void OnDestroy()
         {
-            PlayerInputUserManager.Instance.Input.BoostSpeedMode.performed -= Boost;
-            PlayerInputUserManager.Instance.Input.DefaultSpeedMode.performed -= Default;
-            PlayerInputUserManager.Instance.Input.StopSpeedMode.performed -= Stop;
+            PlayerInputUserManager.Input.BoostSpeedMode.performed -= Boost;
+            PlayerInputUserManager.Input.DefaultSpeedMode.performed -= Default;
+            PlayerInputUserManager.Input.StopSpeedMode.performed -= Stop;
         }
     }
 }

@@ -11,22 +11,22 @@ namespace Source.Managers.GameState
         {
             if (SceneManager.GetActiveScene().name == "MainMenu")
             {
-                await WindowManager.Instance.Open<MenuScreen>(null);
+                await WindowManager.Open<MenuScreen>(null);
             }
             else
             {
                 SceneManager.LoadScene("MainMenu");
-                await WindowManager.Instance.Open<MenuScreen>(null);
+                await WindowManager.Open<MenuScreen>(null);
             }
             
-            AudioManager.Instance.Play("sunaraw");
+            AudioManager.Play("sunaraw");
 
         }
 
         public override async void Unset()
         {
-            AudioManager.Instance.Stop("sunaraw");
-            await WindowManager.Instance.Close<MenuScreen>();
+            AudioManager.Stop("sunaraw");
+            await WindowManager.Close<MenuScreen>();
         }
     }
 }

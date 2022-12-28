@@ -17,22 +17,22 @@ namespace Source.Managers.GameState
         
         public override async void Set()
         {
-            AudioManager.Instance.Stop("Engine");
-            AudioManager.Instance.Play("exp_1");
+            AudioManager.Stop("Engine");
+            AudioManager.Play("exp_1");
             
             if(Math.Abs(_scoreManager.Score - _scoreManager.HighestScore) < 0.001)
-                AudioManager.Instance.Play("NewHighScore");
+                AudioManager.Play("NewHighScore");
 
             var deadScreenData = new DeadScreen.DeadScreenData(_scoreManager.Score,
             Math.Abs(_scoreManager.Score - _scoreManager.HighestScore) < 0.001);
             ScoreStorage.SaveToFile();
             _scoreManager.Reset();
-            await WindowManager.Instance.Open<DeadScreen>(deadScreenData);
+            await WindowManager.Open<DeadScreen>(deadScreenData);
         }
 
         public override async void Unset()
         {
-            await WindowManager.Instance.Close<DeadScreen>();
+            await WindowManager.Close<DeadScreen>();
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Source.Entities.Ship
         
         private void FixedUpdate()
         {
-            _moveByLeftRightDirectionComponent.Turn(PlayerInputUserManager.Instance.Input.Move.ReadValue<Vector2>() * GlobalEntityTimeScale);
+            _moveByLeftRightDirectionComponent.Turn(PlayerInputUserManager.Input.Move.ReadValue<Vector2>() * GlobalEntityTimeScale);
             UpdateComponents();
         }
     }
