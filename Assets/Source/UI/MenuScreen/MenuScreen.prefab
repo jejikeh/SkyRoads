@@ -260,7 +260,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2999668599914323383}
         m_TargetAssemblyTypeName: Source.UI.MenuScreen.MenuScreen, Assembly-CSharp
-        m_MethodName: ClearRecords
+        m_MethodName: ClearData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -356,7 +356,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Clear Records
+  m_text: Clear Data
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a57b3976827901c479f63f21428aa17d, type: 2}
   m_sharedMaterial: {fileID: -4065443155104180463, guid: a57b3976827901c479f63f21428aa17d, type: 2}

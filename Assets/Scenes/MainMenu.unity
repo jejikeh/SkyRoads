@@ -972,6 +972,7 @@ MonoBehaviour:
   - {fileID: 4756260781375262593, guid: 2d35ea95cdab54e43b2c06b963b5d466, type: 3}
   - {fileID: 4756260781375262593, guid: e55d7e1ec6202d54fa0ceb3507a508f2, type: 3}
   - {fileID: 4756260781375262593, guid: 20778629095f0644f8975e551145f097, type: 3}
+  - {fileID: 4756260781375262593, guid: 568fad5905d74524385ae57bb171b477, type: 3}
   _canvas: {fileID: 911275278}
 --- !u!114 &911275276
 MonoBehaviour:

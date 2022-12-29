@@ -33,10 +33,13 @@ namespace Source.UI.MenuScreen
             AudioManager.ToggleAudioVolume();
         }
 
-        public void Play()
+        public async void Play()
         { 
-           AudioManager.Play("Click_02");
-           GameStateManager.SetGameState(GameStateManager.GameState.Play);
+            AudioManager.Play("Click_02");
+            if (PlayerPrefs.GetInt("comics") == 0)
+                await WindowManager.Open<ComicsScreen.ComicsScreen>(null);
+            else
+                GameStateManager.SetGameState(GameStateManager.GameState.Play);
         }
         
         public async void OpenRecord()
@@ -45,10 +48,11 @@ namespace Source.UI.MenuScreen
             await WindowManager.Open<RecordsScreen.RecordScreen>(ScoreStorage.SortedRecords);
         }   
         
-        public void ClearRecords()
+        public void ClearData()
         {
             AudioManager.Play("Click_02");
             ScoreStorage.ClearRecords();
+            PlayerPrefs.DeleteAll();
         }
         
         public void ExitGame()

@@ -29,9 +29,7 @@ namespace Source.UI.RecordsScreen
             var desirePosition = transform;
             var size = desirePosition.localScale;
             desirePosition.localScale = Vector3.zero;
-            var tweener = transform.DOScale(size, 0.25f).SetEase(Ease.OutSine);
-            
-            await tweener.AsyncWaitForCompletion();
+            await transform.DOScale(size, 0.25f).SetEase(Ease.OutSine).AsyncWaitForCompletion();
         }
 
         protected override async Task CloseStart()

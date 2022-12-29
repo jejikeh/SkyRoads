@@ -43,7 +43,7 @@ namespace Source.Managers.Score
 
         public static void ClearRecords()
         {
-            PlayerPrefs.DeleteAll();
+            PlayerPrefs.DeleteKey("recordTable");
             _records.Clear();
         }
 

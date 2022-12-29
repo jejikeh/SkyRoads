@@ -10,8 +10,7 @@ namespace Source.UI.PauseScreen
     {
         protected override async Task OpenStart()
         {
-            var tweener = transform.DOScale(Vector3.zero, 0.25f).SetEase(Ease.OutSine);
-            await tweener.AsyncWaitForCompletion();
+            await transform.DOScale(Vector3.zero, 0.25f).SetEase(Ease.OutSine).AsyncWaitForCompletion();
         }
     }
 }
