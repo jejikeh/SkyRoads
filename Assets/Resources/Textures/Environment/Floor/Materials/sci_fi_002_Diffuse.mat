@@ -44,11 +44,11 @@ Material:
     - _EmissionTex:
         m_Texture: {fileID: 2800000, guid: a014c1d3d536d744492f5f77ab827480, type: 3}
         m_Scale: {x: 1, y: 2}
-        m_Offset: {x: 0, y: -0.25846937}
+        m_Offset: {x: 0, y: -0.1476374}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: a2acd5db4b23dcc4d8e37abba17649af, type: 3}
         m_Scale: {x: 1, y: 2}
-        m_Offset: {x: 0, y: -0.25846937}
+        m_Offset: {x: 0, y: -0.1476374}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -56,7 +56,7 @@ Material:
     - _NormalTex:
         m_Texture: {fileID: 2800000, guid: 587f00226871d634699b3ed679a02e36, type: 3}
         m_Scale: {x: 1, y: 2}
-        m_Offset: {x: 0, y: -0.25846937}
+        m_Offset: {x: 0, y: -0.1476374}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -68,7 +68,7 @@ Material:
     - _SpecTex:
         m_Texture: {fileID: 2800000, guid: fa6721dc812dae74cbe3fbb47529c3f6, type: 3}
         m_Scale: {x: 1, y: 2}
-        m_Offset: {x: 0, y: -0.25846937}
+        m_Offset: {x: 0, y: -0.1476374}
     m_Ints: []
     m_Floats:
     - _BumpScale: 1

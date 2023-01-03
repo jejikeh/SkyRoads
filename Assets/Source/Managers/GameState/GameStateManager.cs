@@ -30,7 +30,8 @@ namespace Source.Managers.GameState
 
         public static void SetGameState(GameState state)
         {
-            if(state == _currentState) return;
+            if(state == _currentState) 
+                return;
             _state?.Unset();
             switch (state)
             {
